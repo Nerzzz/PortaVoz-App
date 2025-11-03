@@ -195,19 +195,15 @@ public class PublicProfileActivity extends AppCompatActivity {
                         JSONObject postObj = postsArray.getJSONObject(i);
 
                         String id_ = postObj.getString("_id");
-                        String title = postObj.getString("title");
+
+                        int likes = postObj.getInt("upvotesCount");
+                        int comments = postObj.getInt("commentsCount");
 
                         JSONArray imagesJson = postObj.getJSONArray("images");
                         List<String> images = new ArrayList<>();
                         images.add(imagesJson.getString(0));
 
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
-                        userPosts.add(new Post(id_, title, images));
+                        userPosts.add(new Post(id_, likes, comments, images));
 
                     }
 

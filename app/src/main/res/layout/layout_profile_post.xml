@@ -9,6 +9,20 @@
     android:layout_marginBottom="4dp"
     android:background="@drawable/lay_rounded_white">
 
+    <TextView
+        android:id="@+id/profilePost_txtComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="0"
+        android:textColor="@color/darkGrey"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
     <ImageView
         android:id="@+id/profilePost_img"
         android:layout_width="wrap_content"
@@ -21,20 +35,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/user_image_placeholder" />
 
-    <TextView
-        android:id="@+id/profilePost_txtTitle"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:tint="@color/darkGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePost_img"
+        app:srcCompat="@drawable/ic_arrow_big_up" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:tint="@color/darkGrey"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/profilePost_txtUpvotes"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:srcCompat="@drawable/ic_message" />
+
+    <TextView
+        android:id="@+id/profilePost_txtUpvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
         android:fontFamily="@font/poppins_medium"
         android:includeFontPadding="false"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/profilePost_img"
-        app:layout_constraintStart_toStartOf="@+id/profilePost_img"
-        app:layout_constraintTop_toBottomOf="@+id/profilePost_img" />
+        android:text="0"
+        android:textColor="@color/darkGrey"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

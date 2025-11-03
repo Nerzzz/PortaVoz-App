@@ -31,9 +31,8 @@ public class ProfilePostAdapter extends RecyclerView.Adapter<ProfilePostViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePostViewHolder holder, int position) {
-        // TODO: tirar o título e adicionar o contador de upvote e comentário
-
-        holder.txtTitle.setText(posts.get(position).title);
+        holder.txtUpvotes.setText(posts.get(position).likes);
+        holder.txtComments.setText(posts.get(position).comments);
 
         Glide.with(holder.itemView.getContext())
                 .load(posts.get(position).images.get(0))

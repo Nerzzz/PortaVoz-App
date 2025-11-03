@@ -10,9 +10,10 @@ public class Post {
     public List<String> images;
     public List<String> hashtags, hashtagsIds;
 
-    public Post(String id_, String title, List<String> images){
+    public Post(String id_, int likes, int comments, List<String> images){
         this.id_ = id_;
-        this.title = title;
+        this.likes = likes;
+        this.comments = comments;
         this.images = images;
     }
 

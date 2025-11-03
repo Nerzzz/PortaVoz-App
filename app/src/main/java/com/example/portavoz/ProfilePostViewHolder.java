@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfilePostViewHolder extends RecyclerView.ViewHolder{
     ImageView img;
-    TextView txtTitle;
+    TextView txtUpvotes, txtComments;
 
     String id_;
 
@@ -17,6 +17,7 @@ public class ProfilePostViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
 
         img = itemView.findViewById(R.id.profilePost_img);
-        txtTitle = itemView.findViewById(R.id.profilePost_txtTitle);
+        txtUpvotes = itemView.findViewById(R.id.profilePost_txtUpvotes);
+        txtComments = itemView.findViewById(R.id.profilePost_txtComments);
     }
 }
