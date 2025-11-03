@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PortaVoz" parent="Theme.Material3.DynamicColors.Dark.NoActionBar">
+
+        <item name="android:statusBarColor">@color/gradiente2</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

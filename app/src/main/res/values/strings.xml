@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Portavoz</string>
+    <string name="description1">Elemento gráfico</string>
+    <string name="dataPlace">Placeholder Name</string>
+    <string name="datePlace">01 de jan. de 2025</string>
+
+    <!-- Land Page | texts -->
+    <string name="headerTitle">Faça a diferença</string>
+    <string name="headerBody">Bem vindo(a)! Acesse ou crie sua conta para poder desfrutar
+    de todos os nossos recursos e ajudar nossa querida Piracicaba!</string>
+
+    <!-- Land Page | Buttons -->
+    <string name="btnEmail">Entrar com E-mail</string>
+    <string name="btnGoogle">Entrar com Google</string>
+    <string name="btnFace">Entrar com Facebook</string>
+    <string name="btnCadastro">Criar uma conta</string>
+
+    <!-- App | dividers -->
+    <string name="txtAccount">Não tem uma conta?</string>
+
+    <!-- Cad Page | texts -->
+    <string name="headerCadPage">Acesse a sua <b>voz</b> pelo <b>Portavoz.</b></string>
+
+    <!-- Cad Page | labels -->
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="mail">E-mail</string>
+    <string name="pass">Senha</string>
+
+    <!-- Cad Page | hints -->
+    <string name="hintNome">John</string>
+    <string name="hintSobrenome">Does</string>
+    <string name="hintMail">Johndoe@example.com</string>
+    <string name="hintPass"></string>
+
+    <!-- Feed Page | labels -->
+    <string name="hintSearch">Busque por títulos...</string>
+
+    <!-- No Internet Page -->
+    <string name="noInternetTitle">Detectamos que você não está conectado a uma rede!</string>
+    <string name="noInternetDesc">Conecte-se a uma rede ou tente novamente mais tarde. Se persistir, contate seu provedor de internet.</string>
+</resources>
