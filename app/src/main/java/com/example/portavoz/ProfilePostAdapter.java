@@ -31,8 +31,8 @@ public class ProfilePostAdapter extends RecyclerView.Adapter<ProfilePostViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePostViewHolder holder, int position) {
-        holder.txtUpvotes.setText(posts.get(position).likes);
-        holder.txtComments.setText(posts.get(position).comments);
+        holder.txtUpvotes.setText(String.valueOf(posts.get(position).likes));
+        holder.txtComments.setText(String.valueOf(posts.get(position).comments));
 
         Glide.with(holder.itemView.getContext())
                 .load(posts.get(position).images.get(0))
