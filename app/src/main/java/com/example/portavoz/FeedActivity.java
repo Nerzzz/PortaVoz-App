@@ -67,8 +67,6 @@ public class FeedActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intent = new Intent();
-        userData = intent.getStringExtra("userData");
 
         loading = findViewById(R.id.feed_loadingProgress);
         loading.setVisibility(VISIBLE);
@@ -82,7 +80,7 @@ public class FeedActivity extends AppCompatActivity {
         userPfpImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(FeedActivity.this, PersonalProfileActivity.class));
             }
         });
 
@@ -164,8 +162,6 @@ public class FeedActivity extends AppCompatActivity {
             if(APIResult_user != null){
                 try {
                     Log.v("CURRENT_USER_DATA", APIResult_user);
-
-
 
                     JSONObject root = new JSONObject(APIResult_user);
 
