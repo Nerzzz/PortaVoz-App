@@ -15,6 +15,9 @@
         android:theme="@style/Base.Theme.PortaVoz"
         tools:targetApi="31">
         <activity
+            android:name=".PrivateProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".PublicProfileActivity"
             android:exported="false" />
         <activity
