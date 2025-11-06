@@ -39,4 +39,7 @@
     <!-- No Internet Page -->
     <string name="noInternetTitle">Detectamos que você não está conectado a uma rede!</string>
     <string name="noInternetDesc">Conecte-se a uma rede ou tente novamente mais tarde. Se persistir, contate seu provedor de internet.</string>
+
+    <!-- Profiles Pages -->
+    <string name="noPosts">ainda não tem nenhuma denúncia :/</string>
 </resources>

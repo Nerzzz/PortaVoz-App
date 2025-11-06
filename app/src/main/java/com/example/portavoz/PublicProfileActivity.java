@@ -56,9 +56,9 @@ public class PublicProfileActivity extends AppCompatActivity {
     ArrayList<Post> userPosts = new ArrayList<>();
 
     ImageView imgUser, imgBanner;
-    TextView txtDisplayName, txtUsername, txtFollowers, txtFollowing, txtAbout;
+    TextView txtDisplayName, txtUsername, txtFollowers, txtFollowing, txtAbout, txtInfo;
     MaterialButton btnFollow;
-    ProgressBar pgLoad1;
+    ProgressBar pgLoad1, loadingPosts;
     LinearLayout profileView;
     ImageButton btnReturn;
     RecyclerView rcPosts;
@@ -107,6 +107,9 @@ public class PublicProfileActivity extends AppCompatActivity {
         rcPosts = findViewById(R.id.publicProfile_rcPosts);
         linearLayoutManager = new LinearLayoutManager(this);
         rcPosts.setLayoutManager(new GridLayoutManager(this, 2));
+
+        loadingPosts = findViewById(R.id.publicProfile_progress2);
+        txtInfo = findViewById(R.id.publicProfile_txtInfo);
 
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         mUser.getIdToken(true)
@@ -190,24 +193,31 @@ public class PublicProfileActivity extends AppCompatActivity {
                     JSONObject root = new JSONObject(s);
                     JSONArray postsArray = root.getJSONArray("posts");
 
-                    for(int i = 0; i < postsArray.length(); i++){
-                        JSONObject postObj = postsArray.getJSONObject(i);
+                    if(postsArray.length() > 0){
+                        for(int i = 0; i < postsArray.length(); i++){
+                            JSONObject postObj = postsArray.getJSONObject(i);
 
-                        String id_ = postObj.getString("_id");
+                            String id_ = postObj.getString("_id");
 
-                        int likes = postObj.getInt("upvotesCount");
-                        int comments = postObj.getInt("commentsCount");
+                            int likes = postObj.getInt("upvotesCount");
+                            int comments = postObj.getInt("commentsCount");
 
-                        JSONArray imagesJson = postObj.getJSONArray("images");
-                        List<String> images = new ArrayList<>();
-                        images.add(imagesJson.getString(0));
+                            JSONArray imagesJson = postObj.getJSONArray("images");
+                            List<String> images = new ArrayList<>();
+                            images.add(imagesJson.getString(0));
 
-                        userPosts.add(new Post(id_, likes, comments, images));
-
+                            userPosts.add(new Post(id_, likes, comments, images));
+                        }
+                    }
+                    else{
+                        txtInfo.setText(txtDisplayName.getText().toString()+" "+getString(R.string.noPosts));
+                        txtInfo.setVisibility(View.VISIBLE);
                     }
 
                     profilePostAdapter = new ProfilePostAdapter(userPosts, PublicProfileActivity.this);
                     rcPosts.setAdapter(profilePostAdapter);
+
+                    loadingPosts.setVisibility(View.INVISIBLE);
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -475,6 +485,8 @@ public class PublicProfileActivity extends AppCompatActivity {
 
             pgLoad1.setVisibility(View.INVISIBLE);
             profileView.setVisibility(View.VISIBLE);
+
+            loadingPosts.setVisibility(View.VISIBLE);
 
             btnFollow.setEnabled(true);
             btnFollow.setAlpha(1f);
