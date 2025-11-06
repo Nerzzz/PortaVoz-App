@@ -203,4 +203,30 @@
         tools:itemCount="4"
         tools:listitem="@layout/layout_profile_post" />
 
+    <ProgressBar
+        android:id="@+id/publicProfile_progress2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/gradienteCenter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/publicProfile_pgLoad1" />
+
+    <TextView
+        android:id="@+id/publicProfile_txtInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/noPosts"
+        android:textColor="@color/greyText"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/publicProfile_progress2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/publicProfile_progress2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

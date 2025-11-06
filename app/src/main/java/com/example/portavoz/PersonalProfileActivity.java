@@ -46,11 +46,11 @@ import javax.net.ssl.HttpsURLConnection;
 public class PersonalProfileActivity extends AppCompatActivity {
 
     ImageView imgUser, imgBanner;
-    TextView txtDisplayName, txtUsername, txtFollowers, txtFollowing, txtAbout;
+    TextView txtDisplayName, txtUsername, txtFollowers, txtFollowing, txtAbout, txtInfo;
     RecyclerView rcPosts;
     ProfilePostAdapter profilePostAdapter;
     LinearLayoutManager linearLayoutManager;
-    ProgressBar loadingUserData;
+    ProgressBar loadingUserData, loadingPosts;
     LinearLayout profileView;
     ImageButton btnReturn;
 
@@ -96,6 +96,9 @@ public class PersonalProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        txtInfo = findViewById(R.id.personalProfile_txtInfo);
+        loadingPosts = findViewById(R.id.personalProfile_progress2);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
@@ -198,6 +201,8 @@ public class PersonalProfileActivity extends AppCompatActivity {
                     profileView.setVisibility(View.VISIBLE);
                     loadingUserData.setVisibility(View.INVISIBLE);
 
+                    loadingPosts.setVisibility(View.VISIBLE);
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -238,6 +243,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
                 is.close();
                 conn.disconnect();
 
+                loadingPosts.setVisibility(View.INVISIBLE);
                 return sb.toString();
 
             } catch (ProtocolException e) {
@@ -250,6 +256,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String s) {
             if(s != null){
@@ -259,20 +266,25 @@ public class PersonalProfileActivity extends AppCompatActivity {
                     JSONObject root = new JSONObject(s);
                     JSONArray postsArray = root.getJSONArray("posts");
 
-                    for(int i = 0; i < postsArray.length(); i++){
-                        JSONObject postObj = postsArray.getJSONObject(i);
+                    if(postsArray.length() > 0){
+                        for(int i = 0; i < postsArray.length(); i++){
+                            JSONObject postObj = postsArray.getJSONObject(i);
 
-                        String id_ = postObj.getString("_id");
+                            String id_ = postObj.getString("_id");
 
-                        int likes = postObj.getInt("upvotesCount");
-                        int comments = postObj.getInt("commentsCount");
+                            int likes = postObj.getInt("upvotesCount");
+                            int comments = postObj.getInt("commentsCount");
 
-                        JSONArray imagesJson = postObj.getJSONArray("images");
-                        List<String> images = new ArrayList<>();
-                        images.add(imagesJson.getString(0));
+                            JSONArray imagesJson = postObj.getJSONArray("images");
+                            List<String> images = new ArrayList<>();
+                            images.add(imagesJson.getString(0));
 
-                        userPosts.add(new Post(id_, likes, comments, images));
-
+                            userPosts.add(new Post(id_, likes, comments, images));
+                        }
+                    }
+                    else{
+                        txtInfo.setText("Você "+getString(R.string.noPosts));
+                        txtInfo.setVisibility(View.VISIBLE);
                     }
 
                     profilePostAdapter = new ProfilePostAdapter(userPosts, PersonalProfileActivity.this);
