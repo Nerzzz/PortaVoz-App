@@ -151,7 +151,7 @@ public class PublicProfileActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpsURLConnection conn;
             try {
-                URL url = new URL("https://portavoz.onrender.com/api/v1/posts/user/"+userId);
+                URL url = new URL("https://portavoz.onrender.com/api/v1/users/"+userId+"/posts");
 
                 conn = (HttpsURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
@@ -217,7 +217,7 @@ public class PublicProfileActivity extends AppCompatActivity {
                     profilePostAdapter = new ProfilePostAdapter(userPosts, PublicProfileActivity.this);
                     rcPosts.setAdapter(profilePostAdapter);
 
-                    loadingPosts.setVisibility(View.INVISIBLE);
+                    loadingPosts.setAlpha(0f);
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -483,7 +483,7 @@ public class PublicProfileActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            pgLoad1.setVisibility(View.INVISIBLE);
+            pgLoad1.setAlpha(0f);
             profileView.setVisibility(View.VISIBLE);
 
             loadingPosts.setVisibility(View.VISIBLE);

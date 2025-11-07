@@ -15,6 +15,18 @@
         android:theme="@style/Base.Theme.PortaVoz"
         tools:targetApi="31">
         <activity
+            android:name=".settings.account.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.account.ChangeEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.AccountSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".PrivateProfileActivity"
             android:exported="false" />
         <activity

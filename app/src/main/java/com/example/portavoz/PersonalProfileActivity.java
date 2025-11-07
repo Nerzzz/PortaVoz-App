@@ -1,6 +1,7 @@
 package com.example.portavoz;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +54,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     ProgressBar loadingUserData, loadingPosts;
     LinearLayout profileView;
-    ImageButton btnReturn;
+    ImageButton btnReturn, btnSettings;
 
     FirebaseUser user;
     ArrayList<Post> userPosts = new ArrayList<>();
@@ -99,6 +101,14 @@ public class PersonalProfileActivity extends AppCompatActivity {
 
         txtInfo = findViewById(R.id.personalProfile_txtInfo);
         loadingPosts = findViewById(R.id.personalProfile_progress2);
+
+        btnSettings = findViewById(R.id.personalProfile_btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PersonalProfileActivity.this, SettingsActivity.class));
+            }
+        });
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
@@ -209,8 +219,6 @@ public class PersonalProfileActivity extends AppCompatActivity {
             }
         }
     }
-
-    // Todo: adicionar um texto indicando que não há posts
     public class UserPosts extends  AsyncTask<String, Void, String>{
         String token, userId;
         public UserPosts(String token, String userId){
@@ -222,7 +230,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpsURLConnection conn;
             try {
-                URL url = new URL("https://portavoz.onrender.com/api/v1/posts/user/"+userId);
+                URL url = new URL("https://portavoz.onrender.com/api/v1/users/"+userId+"/posts");
 
                 conn = (HttpsURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

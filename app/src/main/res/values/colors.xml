@@ -15,4 +15,6 @@
     <color name="statusColor1">#054D95</color>
     <color name="navColor1">#DFDEDE</color>
     <color name="navColor2">#f4f4f4</color>
+
+    <color name="danger">#DB131E</color>
 </resources>
