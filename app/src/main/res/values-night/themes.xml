@@ -1,8 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PortaVoz" parent="Theme.Material3.DynamicColors.Dark.NoActionBar">
+    <style name="Theme.PortaVoz" parent="Theme.Material3.Dark.NoActionBar">
 
-        <item name="android:statusBarColor">@color/gradiente2</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="logo">@drawable/logo2</item>
+
+        <item name="txtColor">#f4f4f4</item>
+        <item name="bgColor">#1A1A1A</item>
+        <item name="itemBgColor">#212121</item>
+        <item name="border1">#4B4B4B</item>
+
+        <item name="primaryNavColor">#9B9B9B</item>
+        <item name="secondaryNavColor">#878787</item>
+        <item name="terciaryNavColor">#404040</item>
+
+        <item name="hintColor">#626262</item>
+
     </style>
 </resources>

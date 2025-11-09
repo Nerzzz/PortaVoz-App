@@ -1,4 +1,4 @@
-package com.example.portavoz;
+package com.example.portavoz.post;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,24 +14,24 @@ import com.example.portavoz.R;
 import java.util.ArrayList;
 
 
-public class FeedAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
     ArrayList<Post> posts;
 
-    public FeedAdapter(ArrayList<Post> p, Context ctx){
+    public PostFeedAdapter(ArrayList<Post> p, Context ctx){
         posts = p;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(
+    public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PostViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_post, parent, false)
         );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         holder.username.setText(posts.get(position).username);
         holder.created.setText(posts.get(position).created);
         holder.likes.setText(String.valueOf(posts.get(position).likes));

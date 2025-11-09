@@ -1,4 +1,4 @@
-package com.example.portavoz;
+package com.example.portavoz.post;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portavoz.R;
 
-public class ImageViewHolder extends RecyclerView.ViewHolder {
+public class PostImageViewHolder extends RecyclerView.ViewHolder {
     ImageView image;
     @SuppressLint("ClickableViewAccessibility")
-    public ImageViewHolder(@NonNull View itemView){
+    public PostImageViewHolder(@NonNull View itemView){
         super(itemView);
         image = itemView.findViewById(R.id.post_image);
 

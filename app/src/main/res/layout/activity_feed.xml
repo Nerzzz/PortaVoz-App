@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/bgColor"
     tools:context=".FeedActivity">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginStart="15dp"
         android:fontFamily="@font/lexenddeca"
         android:text="@string/app_name"
-        android:textColor="@color/black"
+        android:textColor="?attr/txtColor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/feed_imgUser"
@@ -45,6 +45,7 @@
         android:foregroundGravity="center"
         android:scaleType="center"
         android:src="@drawable/ic_bell"
+        android:tint="?attr/txtColor"
         app:layout_constraintBottom_toBottomOf="@+id/feed_imgUser"
         app:layout_constraintEnd_toStartOf="@+id/feed_imgUser"
         app:layout_constraintTop_toTopOf="@+id/feed_imgUser" />
@@ -70,14 +71,15 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:drawableLeft="@drawable/ic_mag"
+            android:drawableTint="?attr/primaryNavColor"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
             android:hint="@string/hintSearch"
             android:inputType="text"
             android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/greyText"
+            android:textColor="?attr/txtColor"
+            android:textColorHint="?attr/hintColor"
             android:textSize="15sp" />
 
         <ImageButton
@@ -85,9 +87,10 @@
             android:layout_width="40dp"
             android:layout_height="35dp"
             android:background="@drawable/lay_rounded"
-            android:backgroundTint="@color/navColor2"
+            android:backgroundTint="?attr/terciaryNavColor"
             android:backgroundTintMode="add"
-            app:srcCompat="@drawable/ic_slider" />
+            app:srcCompat="@drawable/ic_slider"
+            app:tint="?attr/txtColor"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

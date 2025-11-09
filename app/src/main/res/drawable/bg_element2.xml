@@ -9,8 +9,8 @@
         android:type="linear"
         android:angle="135"
         android:startColor="#7CACE9"
-        android:centerColor="@color/bg"
-        android:endColor="@color/bg"
+        android:centerColor="#00F4F4F4"
+        android:endColor="#00F4F4F4"
         />
 
     <corners android:radius="20dp" />

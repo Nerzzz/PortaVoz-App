@@ -1,13 +1,13 @@
-package com.example.portavoz;
+package com.example.portavoz.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,29 +16,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.Firebase;
-import com.google.firebase.FirebaseApp;
+import com.example.portavoz.FeedActivity;
+import com.example.portavoz.MainActivity;
+import com.example.portavoz.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnLogin;
-    ImageButton btnReturn, btnSeePsw;
+    Button btnLogin, btnReturn;
+    ImageButton btnSeePsw;
     EditText etLogin, etPsw;
+    TextView txtForgotPssw;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.auth_activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -91,6 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 etPsw.setSelection(etPsw.getText().length());
+            }
+        });
+
+        txtForgotPssw = findViewById(R.id.login_txtForgotPsw);
+        txtForgotPssw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPsswActivity.class));
+                finish();
             }
         });
     }

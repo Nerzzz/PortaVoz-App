@@ -1,29 +1,26 @@
-package com.example.portavoz;
+package com.example.portavoz.post;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portavoz.R;
+import com.example.portavoz.profile.PublicProfileActivity;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class PostViewHolder extends RecyclerView.ViewHolder {
     TextView username, created, title, desc, hashtags;
     ImageView imgUser;
     Button likes, comments;
     RecyclerView imagesCarousel;
     String userId, postId;
 
-    public ViewHolder(@NonNull View itemView){
+    public PostViewHolder(@NonNull View itemView){
         super(itemView);
 
         username = itemView.findViewById(R.id.post_txtUsername);

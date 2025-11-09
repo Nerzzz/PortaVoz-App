@@ -5,8 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
-    tools:context=".PersonalProfileActivity">
+    android:background="?attr/bgColor"
+    tools:context=".profile.PersonalProfileActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/personalProfile_btnReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="Voltar"
+        android:textColor="?attr/txtColor"
+        android:textSize="14sp"
+        app:backgroundTint="#00FFFFFF"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconPadding="0dp"
+        app:iconTint="?attr/txtColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#00FFFFFF" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/personalProfile_rcPosts"
@@ -31,14 +51,14 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/lay_rounded_white"
+        android:background="@drawable/lay_rounded_color"
         android:orientation="vertical"
         android:padding="8dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalProfile_btnReturn">
+        app:layout_constraintTop_toBottomOf="@+id/personalProfile_btnEdit">
 
         <ImageView
             android:id="@+id/personalProfile_imgBanner"
@@ -47,7 +67,7 @@
             android:background="@drawable/lay_rounded"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@color/navColor1" />
+            app:srcCompat="?attr/terciaryNavColor" />
 
         <ImageView
             android:id="@+id/personalProfile_imgUser"
@@ -76,7 +96,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:includeFontPadding="false"
                 android:text="TextView"
-                android:textColor="@color/black"
+                android:textColor="?attr/txtColor"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -92,7 +112,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:text="TextView"
-                    android:textColor="@color/greyText"
+                    android:textColor="?attr/primaryNavColor"
                     android:textSize="13sp" />
 
                 <LinearLayout
@@ -110,7 +130,7 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="Seguidores: 0"
-                        android:textColor="@color/greyText"
+                        android:textColor="?attr/primaryNavColor"
                         android:textSize="12sp" />
 
                     <TextView
@@ -122,7 +142,7 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="Seguindo: 0"
-                        android:textColor="@color/greyText"
+                        android:textColor="?attr/primaryNavColor"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -145,7 +165,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:includeFontPadding="false"
                 android:text="Sobre mim"
-                android:textColor="@color/black"
+                android:textColor="?attr/txtColor"
                 android:textSize="16sp" />
 
             <TextView
@@ -157,24 +177,11 @@
                 android:includeFontPadding="false"
                 android:paddingBottom="10dp"
                 android:text="TextView"
-                android:textColor="@color/black" />
+                android:textColor="?attr/txtColor" />
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/personalProfile_btnReturn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:tint="@color/gradienteCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_corner_down_left" />
 
     <ProgressBar
         android:id="@+id/personalProfile_progress1"
@@ -221,22 +228,22 @@
         android:layout_marginEnd="20dp"
         android:background="#00FFFFFF"
         android:scaleType="center"
-        android:tint="@color/darkGrey"
+        app:tint="?attr/primaryNavColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_screw" />
+        app:srcCompat="@drawable/ic_settings" />
 
     <ImageButton
         android:id="@+id/personalProfile_btnEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="10dp"
         android:background="#00FFFFFF"
         android:scaleType="center"
-        android:tint="@color/darkGrey"
+        app:tint="?attr/primaryNavColor"
         app:layout_constraintBottom_toBottomOf="@+id/personalProfile_btnSettings"
         app:layout_constraintEnd_toStartOf="@+id/personalProfile_btnSettings"
         app:layout_constraintTop_toTopOf="@+id/personalProfile_btnSettings"
-        app:srcCompat="@drawable/ic_pencil" />
+        app:srcCompat="@drawable/ic_pencil_cog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

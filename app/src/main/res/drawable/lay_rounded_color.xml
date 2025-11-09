@@ -2,6 +2,6 @@
 <!-- res/drawable/borda_arredondada.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#FFFFFF" />
+    <solid android:color="?attr/itemBgColor" />
     <corners android:radius="10dp" />
 </shape>

@@ -1,7 +1,6 @@
-package com.example.portavoz;
+package com.example.portavoz.profile;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,8 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.post.Post;
+import com.example.portavoz.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ProfilePostAdapter extends RecyclerView.Adapter<ProfilePostViewHolder> {

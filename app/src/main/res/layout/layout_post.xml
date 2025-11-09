@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
-    android:background="@drawable/lay_rounded_white">
+    android:background="@drawable/lay_rounded_color">
 
     <ImageView
         android:id="@+id/post_imgUser"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="@string/dataPlace"
-            android:textColor="@color/black"
+            android:textColor="?attr/txtColor"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="@string/datePlace"
-            android:textColor="@color/darkGrey"
+            android:textColor="?attr/primaryNavColor"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:backgroundTint="#00FFFFFF"
-        android:tint="@color/greyText"
+        app:tint="?attr/secondaryNavColor"
         app:layout_constraintBottom_toBottomOf="@+id/post_imgUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/post_imgUser"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_arrow_big_up"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/darkGrey"
+            android:drawableTint="?attr/primaryNavColor"
             android:elegantTextHeight="false"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_vertical|center_horizontal"
@@ -101,13 +101,13 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="0"
-            android:textColor="@color/darkGrey"
+            android:textColor="?attr/primaryNavColor"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="#00000000"
             app:cornerRadius="100dp"
             app:iconSize="14sp"
-            app:strokeColor="@color/greyText"
+            app:strokeColor="?attr/border1"
             app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -117,7 +117,7 @@
             android:layout_marginLeft="20dp"
             android:drawableLeft="@drawable/ic_message"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/darkGrey"
+            android:drawableTint="?attr/primaryNavColor"
             android:elegantTextHeight="false"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_vertical|center_horizontal"
@@ -125,13 +125,13 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="0"
-            android:textColor="@color/darkGrey"
+            android:textColor="?attr/primaryNavColor"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="#00000000"
             app:cornerRadius="100dp"
             app:iconSize="14sp"
-            app:strokeColor="@color/greyText"
+            app:strokeColor="?attr/border1"
             app:strokeWidth="1dp" />
     </LinearLayout>
 
@@ -155,7 +155,7 @@
         android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/dataPlace"
-        android:textColor="@color/black"
+        android:textColor="?attr/txtColor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/post_btnLocation"
         app:layout_constraintStart_toStartOf="@+id/linearLayout4"
@@ -168,7 +168,8 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins"
         android:text="Lorem impsium sit dolor armet"
-        android:textColor="@color/black"
+        android:textColor="?attr/txtColor"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/post_txtTitle"
         app:layout_constraintStart_toStartOf="@+id/post_txtTitle"
         app:layout_constraintTop_toBottomOf="@+id/post_txtTitle" />
@@ -182,6 +183,7 @@
         android:fontFamily="@font/poppins"
         android:text="#lorem #impsium"
         android:textColor="@color/gradiente2"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/post_txtDesc"
         app:layout_constraintStart_toStartOf="@+id/post_txtDesc"

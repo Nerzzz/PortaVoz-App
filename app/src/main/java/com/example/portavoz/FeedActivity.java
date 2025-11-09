@@ -11,10 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.post.PostFeedAdapter;
+import com.example.portavoz.post.Post;
+import com.example.portavoz.profile.PersonalProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +41,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -48,7 +48,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class FeedActivity extends AppCompatActivity {
 
     ImageView userPfpImage;
-    FeedAdapter adapter;
+    PostFeedAdapter adapter;
     RecyclerView timeLine;
     LinearLayoutManager linearLayoutManager;
     ArrayList<Post> posts = new ArrayList<>();
@@ -308,7 +308,7 @@ public class FeedActivity extends AppCompatActivity {
                         ));
                     }
 
-                    adapter = new FeedAdapter(posts, FeedActivity.this);
+                    adapter = new PostFeedAdapter(posts, FeedActivity.this);
                     timeLine.setAdapter(adapter);
 
                     loading.setVisibility(INVISIBLE);

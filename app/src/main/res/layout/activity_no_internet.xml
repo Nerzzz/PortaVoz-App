@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/bgColor"
     tools:context=".NoInternetActivity">
 
     <Button
@@ -17,6 +17,7 @@
         android:layout_marginBottom="40dp"
         android:background="@drawable/gradient_button"
         android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
         android:includeFontPadding="false"
         android:text="Tentar novamente"
         android:textAllCaps="false"
@@ -56,7 +57,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/noInternetTitle"
-            android:textColor="@color/black"
+            android:textColor="?attr/txtColor"
             android:textSize="20sp" />
 
         <TextView
@@ -68,7 +69,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/noInternetDesc"
-            android:textColor="@color/darkGrey"
+            android:textColor="?attr/primaryNavColor"
             android:textSize="12sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

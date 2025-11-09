@@ -1,4 +1,4 @@
-package com.example.portavoz;
+package com.example.portavoz.post;
 
 import java.util.List;
 

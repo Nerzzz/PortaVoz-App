@@ -2,10 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
+
     <color name="bg">#f4f4f4</color>
+
     <color name="whiteText">#fafafa</color>
     <color name="greyText">#A6A6A6</color>
     <color name="darkGrey">#616161</color>
+
+    <color name="placeholderColor">#80616161</color>
 
     <color name="gradiente1">#015ca3</color>
     <color name="gradienteCenter">#396ad8</color>
@@ -16,5 +20,5 @@
     <color name="navColor1">#DFDEDE</color>
     <color name="navColor2">#f4f4f4</color>
 
-    <color name="danger">#DB131E</color>
+    <color name="danger">#E22A35</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.portavoz;
+package com.example.portavoz.profile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.post.Post;
+import com.example.portavoz.R;
 import com.example.portavoz.settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,7 +57,8 @@ public class PersonalProfileActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     ProgressBar loadingUserData, loadingPosts;
     LinearLayout profileView;
-    ImageButton btnReturn, btnSettings;
+    ImageButton btnSettings;
+    Button btnReturn;
 
     FirebaseUser user;
     ArrayList<Post> userPosts = new ArrayList<>();
@@ -184,17 +188,23 @@ public class PersonalProfileActivity extends AppCompatActivity {
 
                     txtDisplayName.setText(userObj.getString("username"));
                     txtUsername.setText(userObj.getString("fName")+" "+userObj.getString("lName"));
-                    txtAbout.setText(userObj.getString("about"));
+
+                    if(userObj.getString("about").equals("")){
+                        txtAbout.setText("Nada ainda :/");
+                    }
+                    else{
+                        txtAbout.setText(userObj.getString("about"));
+                    }
 
                     if(!userObj.getString("image").isEmpty()){
                         Glide.with(PersonalProfileActivity.this)
                                 .load(userObj.getString("banner"))
-                                .placeholder(R.color.navColor1)
-                                .error(R.color.navColor1)
+                                .placeholder(R.color.placeholderColor)
+                                .error(R.color.placeholderColor)
                                 .into(imgBanner);
                     }
                     else{
-                        imgBanner.setImageResource(R.color.navColor1);
+                        imgBanner.setImageResource(R.color.placeholderColor);
                     }
 
                     Glide.with(PersonalProfileActivity.this)

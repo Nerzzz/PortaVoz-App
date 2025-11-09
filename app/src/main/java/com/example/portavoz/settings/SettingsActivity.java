@@ -14,9 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.portavoz.R;
 
 public class SettingsActivity extends AppCompatActivity {
-
-    ImageButton btnReturn;
-    Button btnGeneral, btnAccount, btnRisk;
+    Button btnGeneral, btnAccount, btnRisk, btnReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +38,18 @@ public class SettingsActivity extends AppCompatActivity {
         btnGeneral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, AccountSettingsActivity.class));
+                // TODO: fazer essa interface
             }
         });
 
         btnAccount = findViewById(R.id.sett_btnAccount);
+        btnAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, AccountSettingsActivity.class));
+            }
+        });
+
         btnRisk = findViewById(R.id.sett_btnRisk);
     }
 }

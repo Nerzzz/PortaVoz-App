@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/bgColor"
     android:foregroundTintMode="add"
     tools:context=".SplashActivity">
 
@@ -40,7 +40,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/poppins_regular"
         android:text="TextView"
-        android:textColor="@color/darkGrey"
+        android:textColor="?attr/secondaryNavColor"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"

@@ -1,6 +1,5 @@
-package com.example.portavoz;
+package com.example.portavoz.post;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,7 +11,7 @@ import com.example.portavoz.R;
 
 import java.util.List;
 
-public class PostImageAdapter extends RecyclerView.Adapter<ImageViewHolder>{
+public class PostImageAdapter extends RecyclerView.Adapter<PostImageViewHolder>{
     public List<String> images;
 
     public PostImageAdapter(List<String> images){
@@ -21,20 +20,20 @@ public class PostImageAdapter extends RecyclerView.Adapter<ImageViewHolder>{
 
     @NonNull
     @Override
-    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ImageViewHolder(
+    public PostImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PostImageViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_post_image, parent, false)
         );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostImageViewHolder holder, int position) {
 
         Glide.with(holder.itemView.getContext())
                 .load(images.get(position))
-                .placeholder(R.drawable.avatar)
-                .error(R.drawable.ic_launcher_foreground)
+                .placeholder(R.color.placeholderColor)
+                .error(R.color.placeholderColor)
                 .into(holder.image);
     }
 
