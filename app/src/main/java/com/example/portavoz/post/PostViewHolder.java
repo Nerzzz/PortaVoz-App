@@ -3,6 +3,7 @@ package com.example.portavoz.post;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     ImageView imgUser;
     Button likes, comments;
     RecyclerView imagesCarousel;
+    ImageButton btnMap;
     String userId, postId;
 
     public PostViewHolder(@NonNull View itemView){
@@ -31,6 +33,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
         likes = itemView.findViewById(R.id.post_btnLike);
         comments = itemView.findViewById(R.id.post_btnComment);
+
+        btnMap = itemView.findViewById(R.id.post_btnMap);
 
         imgUser = itemView.findViewById(R.id.post_imgUser);
         imgUser.setOnClickListener(new View.OnClickListener() {

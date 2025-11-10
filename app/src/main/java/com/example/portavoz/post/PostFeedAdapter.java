@@ -1,8 +1,12 @@
 package com.example.portavoz.post;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.portavoz.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -31,7 +39,7 @@ public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.username.setText(posts.get(position).username);
         holder.created.setText(posts.get(position).created);
         holder.likes.setText(String.valueOf(posts.get(position).likes));
@@ -54,6 +62,39 @@ public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
         holder.imagesCarousel.setLayoutManager(layoutManager);
         holder.imagesCarousel.setAdapter(new PostImageAdapter(posts.get(position).images));
+
+        holder.btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context ctx = v.getContext();
+                View dialogView = LayoutInflater.from(ctx).inflate(R.layout.post_layout_map, null);
+
+                TextView txtAdress = dialogView.findViewById(R.id.map_txtAdress);
+                MapView mapView = dialogView.findViewById(R.id.map_mapView);
+
+                txtAdress.setText(posts.get(position).address);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                builder.setView(dialogView);
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
+
+                mapView.onCreate(null);
+                mapView.getMapAsync(googleMap -> {
+                    LatLng koordinaty = new LatLng(posts.get(position).lat, posts.get(position).lon);
+
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(koordinaty)
+                            .title("Localização")
+                            .snippet(posts.get(position).address));
+
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(koordinaty, 15f));
+                });
+
+                mapView.onResume();
+            }
+        });
     }
 
     @Override
