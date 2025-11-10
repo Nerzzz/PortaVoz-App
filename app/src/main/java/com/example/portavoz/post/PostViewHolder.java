@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portavoz.R;
+import com.example.portavoz.profile.PersonalProfileActivity;
 import com.example.portavoz.profile.PublicProfileActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
     TextView username, created, title, desc, hashtags;
@@ -21,13 +24,24 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     RecyclerView imagesCarousel;
     ImageButton btnMap;
     String userId, postId;
+    String userUid = FirebaseAuth.getInstance().getUid();
 
     public PostViewHolder(@NonNull View itemView){
         super(itemView);
 
         username = itemView.findViewById(R.id.post_txtUsername);
         created = itemView.findViewById(R.id.post_txtPostDate);
+
         title = itemView.findViewById(R.id.post_txtTitle);
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(itemView.getContext(), PostFocusActivity.class);
+                intent.putExtra("postId", postId);
+                itemView.getContext().startActivity(intent);
+            }
+        });
+
         desc = itemView.findViewById(R.id.post_txtDesc);
         hashtags = itemView.findViewById(R.id.post_txtHastags);
 
@@ -40,9 +54,14 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         imgUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(itemView.getContext(), PublicProfileActivity.class);
-                intent.putExtra("userId", userId);
-                itemView.getContext().startActivity(intent);
+                if(userId.equals(userUid)){
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), PersonalProfileActivity.class));
+                }
+                else {
+                    Intent intent = new Intent(itemView.getContext(), PublicProfileActivity.class);
+                    intent.putExtra("userId", userId);
+                    itemView.getContext().startActivity(intent);
+                }
             }
         });
 

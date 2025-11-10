@@ -471,6 +471,8 @@ public class PublicProfileActivity extends AppCompatActivity {
                     txtAbout.setText(userObj.getString("about"));
                 }
 
+                // TODO: quando o usuário sai da activity antes de o glide carregar, crasha, CONCERTAR
+
                 Glide.with(PublicProfileActivity.this)
                         .load(userObj.getString("image"))
                         .placeholder(R.drawable.user_image_placeholder)

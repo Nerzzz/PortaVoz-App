@@ -52,7 +52,7 @@ public class FeedActivity extends AppCompatActivity {
     RecyclerView timeLine;
     LinearLayoutManager linearLayoutManager;
     ArrayList<Post> posts = new ArrayList<>();
-    String userData;
+    String userImageUrl;
     String token;
     ProgressBar loading;
 
