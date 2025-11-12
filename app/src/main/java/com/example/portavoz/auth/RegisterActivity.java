@@ -40,11 +40,11 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 
     ImageButton btnSeePsw;
     EditText etFName, etLName, etLogin, etPsw;
-    Button btnRegister, btnReturn;
+    Button btnRegister, btnReturn, register_btnGoogle;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     String APIResult;
@@ -127,6 +127,29 @@ public class RegisterActivity extends AppCompatActivity {
                 etPsw.setSelection(etPsw.getText().length());
             }
         });
+
+        startAuth();
+        register_btnGoogle = findViewById(R.id.register_btnGoogle);
+        register_btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGoogleSingIn();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onAuthSucess(FirebaseUser user) {
+        Intent intent = new Intent(RegisterActivity.this, FeedActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onAuthFail(String errorMessage) {
+        Toast.makeText(this, "Falha na autenticação: " + errorMessage, Toast.LENGTH_LONG).show();
     }
 
     public void registerUser(String fName, String lName, String login, String psw){
@@ -169,6 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
             return "Erro desconhecido: " + e.getMessage();
         }
     }
+
 
     public class SendUserToAPI extends AsyncTask<String, Void, String>{
         private String token, fName, lName;

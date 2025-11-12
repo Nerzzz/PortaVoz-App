@@ -22,10 +22,11 @@ import com.example.portavoz.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
-    Button btnLogin, btnReturn;
+    Button btnLogin, btnReturn, login_btnGoogle;
     ImageButton btnSeePsw;
     EditText etLogin, etPsw;
     TextView txtForgotPssw;
@@ -99,6 +100,17 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        startAuth();
+
+        login_btnGoogle = findViewById(R.id.login_btnGoogle);
+        login_btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGoogleSingIn();
+            }
+        });
+
     }
 
     public void loginUser(String login, String pssw){
@@ -131,5 +143,18 @@ public class LoginActivity extends AppCompatActivity {
         else{
             return "Erro desconhecido: " + e.getMessage();
         }
+    }
+
+    @Override
+    protected void onAuthSucess(FirebaseUser user) {
+        Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onAuthFail(String errorMessage) {
+        Toast.makeText(this, "Falha na autenticação: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
