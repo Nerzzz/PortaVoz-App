@@ -57,7 +57,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     ProgressBar loadingUserData, loadingPosts;
     LinearLayout profileView;
-    ImageButton btnSettings;
+    ImageButton btnSettings, btnEditProfile;
     Button btnReturn;
 
     FirebaseUser user;
@@ -66,7 +66,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_profile);
+        setContentView(R.layout.profile_activity_personal);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -111,6 +111,14 @@ public class PersonalProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(PersonalProfileActivity.this, SettingsActivity.class));
+            }
+        });
+
+        btnEditProfile = findViewById(R.id.personalProfile_btnEdit);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

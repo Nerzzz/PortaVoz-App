@@ -28,7 +28,7 @@ public class ProfilePostAdapter extends RecyclerView.Adapter<ProfilePostViewHold
     public ProfilePostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ProfilePostViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_profile_post, parent, false)
+                        .inflate(R.layout.profile_layout_post, parent, false)
         );
     }
 
