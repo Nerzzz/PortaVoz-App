@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.EditProfileActivity;
 import com.example.portavoz.post.Post;
 import com.example.portavoz.R;
 import com.example.portavoz.settings.SettingsActivity;
@@ -118,7 +119,9 @@ public class PersonalProfileActivity extends AppCompatActivity {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PersonalProfileActivity.this, EditProfileActivity.class);
+                intent.putExtra("userUID", user.getUid());
+                startActivity(intent);
             }
         });
 
