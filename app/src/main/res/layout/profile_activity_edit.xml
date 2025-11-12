@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProfileActivity"
+    tools:context=".profile.EditProfileActivity"
     android:background="?attr/bgColor">
 
 
@@ -31,6 +31,7 @@
         app:rippleColor="#00FFFFFF" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -42,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editPf_btnReturn">
 
         <LinearLayout
+            android:id="@+id/profileView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/lay_rounded_color"
@@ -111,7 +113,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/editPf_txtDisplayName"
+                android:id="@+id/editPf_eDisplayName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -126,9 +128,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_pencil"
-                    app:tint="@color/white"/>
+                    app:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/editPf_txtDisplayName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -141,7 +144,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/editPf_txtUsername"
+                android:id="@+id/editPf_eUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -154,9 +157,10 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@drawable/ic_pencil"
-                    app:tint="@color/white"/>
+                    app:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/editPf_txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -180,7 +184,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:id="@+id/editPf_txtAbout"
+                android:id="@+id/editPf_eAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -193,9 +197,10 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@drawable/ic_pencil"
-                    app:tint="@color/white"/>
+                    app:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/editPf_txtAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -210,22 +215,33 @@
                 android:id="@+id/editPf_btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="36dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/gradienteCenter"
                 android:fontFamily="@font/poppins_medium"
                 android:includeFontPadding="false"
                 android:text="Salvar"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 app:icon="@drawable/ic_device_floppy"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
                 app:iconTint="@color/white"
-                android:textColor="@color/white"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/editPf_loadingProfile"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/gradiente2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

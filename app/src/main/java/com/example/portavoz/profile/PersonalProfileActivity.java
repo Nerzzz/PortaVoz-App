@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.portavoz.EditProfileActivity;
 import com.example.portavoz.post.Post;
 import com.example.portavoz.R;
 import com.example.portavoz.settings.SettingsActivity;
@@ -63,6 +62,9 @@ public class PersonalProfileActivity extends AppCompatActivity {
 
     FirebaseUser user;
     ArrayList<Post> userPosts = new ArrayList<>();
+
+    UserMainData userMainData;
+    UserPosts cUserPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +132,25 @@ public class PersonalProfileActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<GetTokenResult> task) {
                 if(task.isSuccessful()){
-                    new UserMainData(task.getResult().getToken(), user.getUid()).execute();
-                    new UserPosts(task.getResult().getToken(), user.getUid()).execute();
+                    userMainData = new UserMainData(task.getResult().getToken(), user.getUid());
+                    userMainData.execute();
+
+                    cUserPosts = new UserPosts(task.getResult().getToken(), user.getUid());
+                    cUserPosts.execute();
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (userMainData != null && !userMainData.isCancelled()) {
+            userMainData.cancel(true);
+        }
+        if (cUserPosts != null && !cUserPosts.isCancelled()) {
+            cUserPosts.cancel(true);
+        }
     }
 
     public class UserMainData extends AsyncTask<String, Void, String>{
@@ -146,11 +162,9 @@ public class PersonalProfileActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
             try {
-                FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-                String userId = mUser.getUid();
-
                 URL url = new URL("https://portavoz.onrender.com/api/v1/users/"+userId);
 
                 conn = (HttpsURLConnection) url.openConnection();
@@ -189,7 +203,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
         @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String APIResult_user){
-            if(APIResult_user != null){
+            if(APIResult_user != null || !isCancelled()){
                 try {
                     Log.v("CURRENT_USER_DATA", APIResult_user);
 

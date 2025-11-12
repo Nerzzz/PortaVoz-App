@@ -67,6 +67,13 @@ public class PublicProfileActivity extends AppCompatActivity {
     ProfilePostAdapter profilePostAdapter;
     LinearLayoutManager linearLayoutManager;
 
+    GetPosts getPosts;
+    GetUser getUser;
+    UnFollowUser unFollowUser;
+    FollowUser followUser;
+    GetFollowUser getFollowUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,9 +128,14 @@ public class PublicProfileActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             token[0] = task.getResult().getToken();
 
-                            new GetFollowUser(token[0]).execute();
-                            new GetUser(token[0]).execute();
-                            new GetPosts(token[0]).execute();
+                            getFollowUser = new GetFollowUser(token[0]);
+                            getFollowUser.execute();
+
+                            getUser = new GetUser(token[0]);
+                            getUser.execute();
+
+                            getPosts = new GetPosts(token[0]);
+                            getPosts.execute();
                         }
                     }
                 });
@@ -135,11 +147,39 @@ public class PublicProfileActivity extends AppCompatActivity {
                 btnFollow.setEnabled(false);
                 btnFollow.setAlpha(0.3f);
 
-                new GetFollowUser(token[0]).execute();
-                if(following){ new UnFollowUser(token[0]).execute(); } else { new FollowUser(token[0]).execute(); }
+                getFollowUser = new GetFollowUser(token[0]);
+                getFollowUser.execute();
+
+                if(following){
+                    unFollowUser = new  UnFollowUser(token[0]);
+                    unFollowUser.execute();
+                } else {
+                    followUser = new FollowUser(token[0]);
+                    followUser.execute();
+                }
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (getPosts != null && !getPosts.isCancelled()) {
+            getPosts.cancel(true);
+        }
+        if (unFollowUser != null && !unFollowUser.isCancelled()) {
+            unFollowUser.cancel(true);
+        }
+        if (followUser != null && !followUser.isCancelled()) {
+            followUser.cancel(true);
+        }
+        if (getFollowUser != null && !getFollowUser.isCancelled()) {
+            getFollowUser.cancel(true);
+        }
+        if (getUser != null && !getUser.isCancelled()) {
+            getUser.cancel(true);
+        }
     }
 
     // Todo: adicionar um texto indicando que não há posts
@@ -151,6 +191,7 @@ public class PublicProfileActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
             try {
                 URL url = new URL("https://portavoz.onrender.com/api/v1/users/"+userId+"/posts");
@@ -188,9 +229,7 @@ public class PublicProfileActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(s != null){
-                Log.v("GetPosts", s);
-
+            if(s != null || !isCancelled()){
                 try {
                     JSONObject root = new JSONObject(s);
                     JSONArray postsArray = root.getJSONArray("posts");
@@ -237,6 +276,7 @@ public class PublicProfileActivity extends AppCompatActivity {
         }
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
 
             try {
@@ -296,6 +336,7 @@ public class PublicProfileActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
             try {
                 URL url = new URL("https://portavoz.onrender.com/api/v1/users/"+userId+"/follow");
@@ -354,6 +395,7 @@ public class PublicProfileActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
             URL url;
             try {
@@ -390,24 +432,26 @@ public class PublicProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
 
-            JSONObject jsonRoot;
-            try {
-                jsonRoot = new JSONObject(s);
+            if(s != null || !isCancelled()){
+                JSONObject jsonRoot;
+                try {
+                    jsonRoot = new JSONObject(s);
 
-                following = jsonRoot.getBoolean("isFollowing");
-                Log.v("FOLLOWING", String.valueOf(following));
+                    following = jsonRoot.getBoolean("isFollowing");
+                    Log.v("FOLLOWING", String.valueOf(following));
 
-                if(jsonRoot.getBoolean("isFollowing")){
-                    btnFollow.setText("parar de seguir");
-                    btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_minus));
+                    if(jsonRoot.getBoolean("isFollowing")){
+                        btnFollow.setText("parar de seguir");
+                        btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_minus));
+                    }
+                    else{
+                        btnFollow.setText("seguir");
+                        btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_plus));
+                    }
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 }
-                else{
-                    btnFollow.setText("seguir");
-                    btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_plus));
-                }
-
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
             }
         }
     }
@@ -419,6 +463,7 @@ public class PublicProfileActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            if(isCancelled()) return null;
             HttpsURLConnection conn;
             URL url;
             try {
@@ -455,51 +500,52 @@ public class PublicProfileActivity extends AppCompatActivity {
         @SuppressLint({"SetTextI18n", "ResourceAsColor"})
         @Override
         protected void onPostExecute(String s){
-            Log.v("SEARCHED_USER", s);
-            try {
-                JSONObject jsonRoot = new JSONObject(s);
-                JSONObject userObj = jsonRoot.getJSONObject("user");
+            if(s != null || !isCancelled()){
+                try {
+                    JSONObject jsonRoot = new JSONObject(s);
+                    JSONObject userObj = jsonRoot.getJSONObject("user");
 
-                txtDisplayName.setText(userObj.getString("username"));
-                txtUsername.setText(userObj.getString("fName") + " " + userObj.getString("lName"));
+                    txtDisplayName.setText(userObj.getString("username"));
+                    txtUsername.setText(userObj.getString("fName") + " " + userObj.getString("lName"));
 
-                if(userObj.getString("about").equals("")){
-                    txtAbout.setText("Nada ainda :/");
+                    if(userObj.getString("about").equals("")){
+                        txtAbout.setText("Nada ainda :/");
+                    }
+                    else{
+                        txtAbout.setText(userObj.getString("about"));
+                    }
+
+                    // TODO: quando o usuário sai da activity antes de o glide carregar, crasha, CONCERTAR
+
+                    Glide.with(PublicProfileActivity.this)
+                            .load(userObj.getString("image"))
+                            .placeholder(R.drawable.user_image_placeholder)
+                            .error(R.drawable.user_image_placeholder)
+                            .into(imgUser);
+
+                    Glide.with(PublicProfileActivity.this)
+                            .load(userObj.getString("banner"))
+                            .placeholder(R.color.placeholderColor)
+                            .error(R.color.placeholderColor)
+                            .into(imgBanner);
+
+                    JSONObject meta = userObj.getJSONObject("meta");
+                    JSONObject counters = meta.getJSONObject("counters");
+                    txtFollowing.setText("Seguindo: " + counters.getString("following"));
+                    txtFollowers.setText("Seguidores: " + counters.getString("followers"));
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 }
-                else{
-                    txtAbout.setText(userObj.getString("about"));
-                }
 
-                // TODO: quando o usuário sai da activity antes de o glide carregar, crasha, CONCERTAR
+                pgLoad1.setAlpha(0f);
+                profileView.setVisibility(View.VISIBLE);
 
-                Glide.with(PublicProfileActivity.this)
-                        .load(userObj.getString("image"))
-                        .placeholder(R.drawable.user_image_placeholder)
-                        .error(R.drawable.user_image_placeholder)
-                        .into(imgUser);
+                loadingPosts.setVisibility(View.VISIBLE);
 
-                Glide.with(PublicProfileActivity.this)
-                        .load(userObj.getString("banner"))
-                        .placeholder(R.color.placeholderColor)
-                        .error(R.color.placeholderColor)
-                        .into(imgBanner);
-
-                JSONObject meta = userObj.getJSONObject("meta");
-                JSONObject counters = meta.getJSONObject("counters");
-                txtFollowing.setText("Seguindo: " + counters.getString("following"));
-                txtFollowers.setText("Seguidores: " + counters.getString("followers"));
-
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
+                btnFollow.setEnabled(true);
+                btnFollow.setAlpha(1f);
             }
-
-            pgLoad1.setAlpha(0f);
-            profileView.setVisibility(View.VISIBLE);
-
-            loadingPosts.setVisibility(View.VISIBLE);
-
-            btnFollow.setEnabled(true);
-            btnFollow.setAlpha(1f);
         }
     }
 }
