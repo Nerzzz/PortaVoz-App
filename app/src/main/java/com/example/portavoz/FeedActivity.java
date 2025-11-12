@@ -25,6 +25,7 @@ import com.example.portavoz.post.Post;
 import com.example.portavoz.profile.PersonalProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
@@ -55,6 +56,7 @@ public class FeedActivity extends AppCompatActivity {
     String userImageUrl;
     String token;
     ProgressBar loading;
+    FloatingActionButton feed_fabReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,15 @@ public class FeedActivity extends AppCompatActivity {
         timeLine = findViewById(R.id.feed_recyTimeLine);
         linearLayoutManager = new LinearLayoutManager(this);
         timeLine.setLayoutManager(linearLayoutManager);
+
+        feed_fabReport = findViewById(R.id.feed_fabReport);
+        feed_fabReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, CreatePost.class);
+                startActivity(intent);
+            }
+        });
 
         userPfpImage = findViewById(R.id.feed_imgUser);
 
