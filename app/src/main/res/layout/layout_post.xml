@@ -153,6 +153,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:clickable="true"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/dataPlace"
         android:textColor="?attr/txtColor"
