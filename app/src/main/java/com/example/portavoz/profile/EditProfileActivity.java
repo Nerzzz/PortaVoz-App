@@ -192,6 +192,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 user.about,
                                                 userPfp,
                                                 userBanner);
+                                        dialog.dismiss();
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -216,7 +217,8 @@ public class EditProfileActivity extends AppCompatActivity {
         editBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectType(true);
+                Toast.makeText(EditProfileActivity.this, "Não é possivel atualizar imagem no momento, utilize o site web para isso", Toast.LENGTH_LONG).show();
+                //selectType(true);
             }
         });
 
@@ -224,7 +226,8 @@ public class EditProfileActivity extends AppCompatActivity {
         editUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectType(false);
+                Toast.makeText(EditProfileActivity.this, "Não é possivel atualizar imagem no momento, utilize o site web para isso", Toast.LENGTH_LONG).show();
+                //selectType(false);
             }
         });
 
@@ -421,7 +424,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if(response.isSuccessful()){
                     UserResponse userResponse = response.body();
-                    Toast.makeText(EditProfileActivity.this, "Deu certo!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, "Perfil atualizado", Toast.LENGTH_SHORT).show();
+
+                    Intent returnIntent = new Intent();
+                    setResult(EditProfileActivity.RESULT_OK, returnIntent);
+
+                    finish();
                 }
                 else{
                     Toast.makeText(EditProfileActivity.this, "Falha: " + response.code(), Toast.LENGTH_SHORT).show();

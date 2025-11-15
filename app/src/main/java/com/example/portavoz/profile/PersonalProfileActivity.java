@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -123,7 +124,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PersonalProfileActivity.this, EditProfileActivity.class);
                 intent.putExtra("userUID", user.getUid());
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -140,6 +141,26 @@ public class PersonalProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                @Override
+                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                    if(task.isSuccessful()){
+                        userMainData = new UserMainData(task.getResult().getToken(), user.getUid());
+                        userMainData.execute();
+
+                        cUserPosts = new UserPosts(task.getResult().getToken(), user.getUid());
+                        cUserPosts.execute();
+                    }
+                }
+            });
+        }
     }
 
     @Override

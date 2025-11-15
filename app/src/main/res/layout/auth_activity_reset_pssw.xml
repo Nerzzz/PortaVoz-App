@@ -5,59 +5,98 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/bgColor"
     tools:context=".auth.ResetPsswActivity">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/resetPsw_btnReturn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/btn_border"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="3dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="Voltar"
+        android:textColor="?attr/txtColor"
+        android:textSize="14sp"
+        app:backgroundTint="#00FFFFFF"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconPadding="0dp"
+        app:iconTint="?attr/txtColor"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="204dp">
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0"
-            android:tint="@color/black"
-            app:srcCompat="@drawable/ic_mail" />
-
-        <EditText
-            android:id="@+id/editTextText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:backgroundTint="#00FFFFFF"
-            android:drawableTint="#00FFFFFF"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:foregroundTint="#00FFFFFF"
-            android:hint="jonhdoe@example.com"
-            android:includeFontPadding="false"
-            android:inputType="text"
-            android:textSize="16sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#00FFFFFF" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_semibold"
         android:includeFontPadding="false"
         android:text="Redefinição de senha"
+        android:textColor="?attr/txtColor"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetPsw_btnReturn" />
+
+    <EditText
+        android:id="@+id/resetPsw_etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/btn_border"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="jonhdoe@example.com"
+        android:includeFontPadding="false"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="15sp"
+        android:textColorHint="?attr/hintColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:text="Informe seu e-mail para enviarmos o seu link de redefinição de senha."
+        android:textColor="?attr/primaryNavColor"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/resetPsw_btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/gradienteCenter"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:paddingStart="40dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="12dp"
+        android:text="Continuar"
+        android:textAllCaps="false"
+        android:textColor="@color/whiteText"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
+        app:cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="@+id/resetPsw_etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/resetPsw_etEmail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

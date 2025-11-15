@@ -104,6 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
                 else{
                     // Supostamente tudo certo
                     registerUser(fName, lName, login, psw);
+                    btnRegister.setActivated(false);
+                    btnRegister.setAlpha(0.3f);
                 }
             }
         });
@@ -152,6 +154,9 @@ public class RegisterActivity extends AppCompatActivity {
             else{
                 Exception e = task.getException();
                 Toast.makeText(this, formatFirebaseException(e), Toast.LENGTH_LONG).show();
+
+                btnRegister.setActivated(true);
+                btnRegister.setAlpha(1f);
             }
         });
     }

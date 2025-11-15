@@ -58,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                btnLogin.setActivated(false);
+                btnLogin.setAlpha(0.3f);
+
                 loginUser(login, pssw);
             }
         });
@@ -96,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ResetPsswActivity.class));
-                finish();
             }
         });
     }
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(login, pssw).addOnCompleteListener(this, task -> {
             if(task.isSuccessful()){
                 startActivity(new Intent(LoginActivity.this, FeedActivity.class));
+                finish();
             }
             else{
                 Exception e = task.getException();
@@ -112,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
                 // TODO: adicionar um layout mais intuitivo de alertar o usuario, sem ser o Toast.
 
                 Toast.makeText(this, formatFirebaseException(e), Toast.LENGTH_LONG).show();
+                btnLogin.setActivated(true);
+                btnLogin.setAlpha(1f);
             }
         });
     }
