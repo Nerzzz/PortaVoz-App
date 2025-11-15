@@ -114,7 +114,7 @@
 
             <LinearLayout
                 android:id="@+id/editPf_eDisplayName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="15dp"
@@ -132,7 +132,7 @@
 
                 <TextView
                     android:id="@+id/editPf_txtDisplayName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:fontFamily="@font/poppins_semibold"
@@ -145,9 +145,10 @@
 
             <LinearLayout
                 android:id="@+id/editPf_eUsername"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="10dp"
@@ -185,10 +186,11 @@
 
             <LinearLayout
                 android:id="@+id/editPf_eAbout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">

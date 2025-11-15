@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/lay_rounded_color">
+
+    <EditText
+        android:id="@+id/edit_etValue1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/btn_border"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"/>
+
+    <EditText
+        android:id="@+id/edit_etValue2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_border"
+        android:hint="Placeholder"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_etValue1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_btnChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/gradienteCenter"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="Feito"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edit_etValue1"
+        app:layout_constraintTop_toBottomOf="@+id/edit_etValue2" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@android:color/transparent"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        app:strokeWidth="1dp"
+        app:strokeColor="?attr/border1"
+        android:text="Cancelar"
+        android:textColor="?attr/txtColor"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_btnChange"
+        app:layout_constraintEnd_toStartOf="@+id/edit_btnChange"
+        app:layout_constraintTop_toTopOf="@+id/edit_btnChange" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
