@@ -87,7 +87,7 @@
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".FeedActivity"
             android:exported="false" />

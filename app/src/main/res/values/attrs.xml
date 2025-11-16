@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <attr name="bgColor" format="color" />
+    <attr name="bgColor2" format="color"/>
+
     <attr name="txtColor" format="color"/>
     <attr name="itemBgColor" format="color"/>
     <attr name="border1" format="color"/>
     <attr name="logo" format="reference"/>
+
+    <attr name="input_text_bg" format="color"/>
 
     <attr name="primaryNavColor" format="color"/>
     <attr name="secondaryNavColor" format="color"/>

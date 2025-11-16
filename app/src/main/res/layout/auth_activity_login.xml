@@ -5,40 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/bgColor"
+    android:background="?attr/bgColor2"
     tools:context=".auth.LoginActivity">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_btnReturn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/poppins_regular"
-        android:includeFontPadding="false"
-        android:padding="5dp"
-        android:text="Voltar"
-        android:textColor="?attr/txtColor"
-        android:textSize="14sp"
-        app:backgroundTint="#00FFFFFF"
-        app:icon="@drawable/ic_chevron_left"
-        app:iconPadding="0dp"
-        app:iconTint="?attr/txtColor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#00FFFFFF" />
-
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btnReturn">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -82,11 +64,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="2"
-                    android:background="@drawable/btn_border"
+                    android:background="@drawable/bg_input_btn_no_color"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_google"/>
+                    android:src="@drawable/ic_google" />
 
                 <View
                     android:id="@+id/view3"
@@ -99,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="2"
-                    android:background="@drawable/btn_border"
+                    android:background="@drawable/bg_input_btn_no_color"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:scaleType="fitCenter"
@@ -115,9 +97,10 @@
                 android:orientation="horizontal">
 
                 <View
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
                     android:background="?attr/terciaryNavColor" />
 
                 <TextView
@@ -127,14 +110,15 @@
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
-                    android:text="Ou"
+                    android:text="Ou Entre Com"
                     android:textColor="?attr/secondaryNavColor"
                     android:textSize="13sp" />
 
                 <View
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
                     android:background="?attr/terciaryNavColor" />
 
             </LinearLayout>
@@ -157,7 +141,7 @@
                     android:id="@+id/login_etLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_border"
+                    android:background="@drawable/bg_input_text"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="johndoe@email.com"
                     android:includeFontPadding="false"
@@ -184,7 +168,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_border"
+                    android:background="@drawable/bg_input_text"
                     android:gravity="center">
 
                     <EditText
@@ -236,9 +220,54 @@
                 android:text="Entrar com E-mail"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                app:cornerRadius="10dp" />
+                app:cornerRadius="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Não possuí uma conta?"
+                    android:textColor="?attr/txtColor" />
+
+                <TextView
+                    android:id="@+id/login_txtRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Clique aqui."
+                    android:textColor="@color/gradienteCenter" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_btnReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="Voltar"
+        android:textColor="?attr/txtColor"
+        android:textSize="14sp"
+        app:backgroundTint="#00FFFFFF"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconPadding="0dp"
+        app:iconTint="?attr/txtColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#00FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

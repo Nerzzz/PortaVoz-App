@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnReturn;
     ImageButton btnSeePsw;
     EditText etLogin, etPsw;
-    TextView txtForgotPssw;
+    TextView txtForgotPssw, txtRegister;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -74,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        txtRegister = findViewById(R.id.login_txtRegister);
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+            }
+        });
+
         btnSeePsw = findViewById(R.id.login_btnSeePsw);
         btnSeePsw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,11 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
             else{
-                Exception e = task.getException();
-
                 // TODO: adicionar um layout mais intuitivo de alertar o usuario, sem ser o Toast.
 
-                Toast.makeText(this, formatFirebaseException(e), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, formatFirebaseException(task.getException()), Toast.LENGTH_LONG).show();
                 btnLogin.setActivated(true);
                 btnLogin.setAlpha(1f);
             }

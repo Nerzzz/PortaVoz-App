@@ -1,19 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.PortaVoz" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">false</item>
 
         <item name="logo">@drawable/logo1</item>
 
         <item name="txtColor">#161616</item>
         <item name="bgColor">#f4f4f4</item>
+        <item name="bgColor2">#fff</item>
         <item name="itemBgColor">#fff</item>
-        <item name="border1">#dfdfdf</item>
+        <item name="border1">#d8d3d4</item>
 
         <item name="primaryNavColor">#6B6B6B</item>
         <item name="secondaryNavColor">#878787</item>
         <item name="terciaryNavColor">#CACACA</item>
 
         <item name="hintColor">#BCBCBC</item>
+
+        <item name="input_text_bg">#f4f4f5</item>
 
     </style>
 </resources>
