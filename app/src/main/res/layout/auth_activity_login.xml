@@ -11,7 +11,7 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fillViewport="true"
             android:orientation="vertical">
 
             <ImageView
@@ -36,7 +36,7 @@
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center_horizontal"
                 android:text="Bem Vindo de Volta!"

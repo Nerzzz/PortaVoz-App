@@ -40,6 +40,6 @@
     <!-- No Internet Page -->
     <string name="noInternetTitle">Detectamos que você não está conectado a uma rede!</string>
     <string name="noInternetDesc">Conecte-se a uma rede ou tente novamente mais tarde. Se persistir, contate seu provedor de internet.</string>
-    
+
     <string name="default_web_client_id">"1048239890968-irfic4t5gu4p1o5ejctr4f6od7sok219.apps.googleusercontent.com"</string>
 </resources>

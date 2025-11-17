@@ -2,239 +2,144 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/bgColor"
-    android:fitsSystemWindows="false"
-    tools:context=".MainActivity">
+    android:backgroundTint="?attr/bgColor2">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:background="@drawable/gradient_bg"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lexenddeca"
-            android:includeFontPadding="false"
-            android:text="@string/headerTitle"
-            android:textColor="@color/whiteText"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/poppins"
-            android:includeFontPadding="false"
-            android:maxWidth="600dp"
-            android:text="@string/headerBody"
-            android:textColor="@color/whiteText"
-            android:textSize="15sp" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="?attr/logo"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/description1"
-        android:cropToPadding="false"
-        android:maxWidth="250dp"
-        android:maxHeight="320dp"
-        android:padding="0dp"
-        android:rotation="14"
-        android:scaleType="fitXY"
-        android:src="@drawable/element1"
-        android:translationX="60dp"
-        android:translationY="-95dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/element1"
-        tools:srcCompat="@drawable/element1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="Faça a Diferença."
+                android:textColor="?attr/txtColor"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Bem vindo ao Portavoz! Ajude a relatar os problemas infraestruturais de Piracicaba! Mas antes, escolha um método de entrada:"
+                android:textColor="?attr/primaryNavColor"
+                android:textSize="14sp"
+                android:layout_marginBottom="40dp"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/description1"
-        android:rotation="-60"
-        android:translationY="-20dp"
-        android:translationZ="-1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/bg_element1" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/gradienteCenter"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="Entrar em uma Conta"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:cornerRadius="12dp" />
 
-    <Button
-        android:id="@+id/main_btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/gradient_button"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:text="@string/btnEmail"
-        android:textAllCaps="false"
-        android:textColor="@color/whiteText"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/gradienteCenter"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="Cadastrar uma Conta"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:cornerRadius="12dp" />
 
-    <Button
-        android:id="@+id/main_loginGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/btn_border"
-        android:drawableLeft="@drawable/google_rezised"
-        android:drawablePadding="0dp"
-        android:fontFamily="@font/poppins"
-        android:includeFontPadding="false"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="Entrar com Google"
-        android:textAllCaps="false"
-        android:textColor="?attr/primaryNavColor"
-        android:textSize="15sp"
-        app:backgroundTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_btnLogin" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/main_loginFacebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/btn_border"
-        android:drawableLeft="@drawable/face_rezised"
-        android:drawablePadding="0dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingLeft="40dp"
-        android:paddingTop="10dp"
-        android:paddingRight="40dp"
-        android:paddingBottom="10dp"
-        android:text="@string/btnFace"
-        android:textAllCaps="false"
-        android:textColor="?attr/primaryNavColor"
-        android:textSize="15sp"
-        app:backgroundTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_loginGoogle" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="?attr/terciaryNavColor" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="153dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/description1"
-        android:translationX="50dp"
-        android:translationY="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/bg_element2" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:text="Ou Utilize as Opções"
+                    android:textColor="?attr/secondaryNavColor"
+                    android:textSize="13sp" />
 
-    <TextView
-        android:id="@+id/textView_divider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:includeFontPadding="false"
-        android:text="@string/txtAccount"
-        android:textColor="?attr/secondaryNavColor"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_loginFacebook"
-        app:layout_constraintVertical_bias="0.172" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="?attr/terciaryNavColor" />
 
-    <View
-        android:id="@+id/divider_left"
-        android:layout_width="0dp"
-        android:layout_height="0.8dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="8dp"
-        android:background="?attr/secondaryNavColor"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_divider"
-        app:layout_constraintEnd_toStartOf="@+id/textView_divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_divider" />
+            </LinearLayout>
 
-    <View
-        android:id="@+id/divider_right"
-        android:layout_width="0dp"
-        android:layout_height="0.8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="40dp"
-        android:background="?attr/secondaryNavColor"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView_divider"
-        app:layout_constraintTop_toTopOf="@+id/textView_divider" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_loginGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:text="Entrar com o Google"
+                android:textColor="?attr/txtColor"
+                android:textSize="15sp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_google"
+                app:iconTint="@null"
+                app:strokeColor="?attr/border1"
+                app:strokeWidth="1dp" />
 
-    <Button
-        android:id="@+id/main_btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/gradient_button"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:text="@string/btnCadastro"
-        android:textAllCaps="false"
-        android:textColor="@color/whiteText"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_divider" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_loginFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:text="Entrar com o Facebook"
+                android:textColor="?attr/txtColor"
+                android:textSize="15sp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_facebook"
+                app:iconTint="@null"
+                app:strokeColor="?attr/border1"
+                app:strokeWidth="1dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

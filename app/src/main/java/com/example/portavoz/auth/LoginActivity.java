@@ -1,12 +1,16 @@
 package com.example.portavoz.auth;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         etLogin = findViewById(R.id.login_etLogin);
         etPsw = findViewById(R.id.login_etPsw);
 
+        etLogin.setFocusable(true);
+        etPsw.setFocusable(true);
+
         btnLogin = findViewById(R.id.login_btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // TODO: adicionar um layout mais intuitivo de alertar o usuario, sem ser o Toast.
                 if(login.isEmpty() || pssw.isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Preencha o formulário corretamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Preencha o formulário corretamente", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -110,6 +117,29 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, ResetPsswActivity.class));
             }
         });
+
+        ScrollView scrollView = findViewById(R.id.scroll);
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+                public void onGlobalLayout() {
+                Rect r = new Rect();
+                scrollView.getWindowVisibleDisplayFrame(r);
+                int screenHeight = scrollView.getRootView().getHeight();
+
+                // r.bottom is the position above soft keypad or device button.
+                // if keypad is shown, the r.bottom is smaller than that before.
+                int keypadHeight = screenHeight - r.bottom;
+
+                if (keypadHeight > screenHeight * 0.15) { // 0.15 ratio is perhaps enough to determine keypad height.
+                    if(etPsw.isFocused()){
+                        scrollView.setTranslationY(keypadHeight*(-0.3f));
+                    }
+                }
+                else {
+                    scrollView.setTranslationY(0f);
+                }
+            }
+        });
     }
 
     public void loginUser(String login, String pssw){
@@ -121,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             else{
                 // TODO: adicionar um layout mais intuitivo de alertar o usuario, sem ser o Toast.
 
-                Toast.makeText(this, formatFirebaseException(task.getException()), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, formatFirebaseException(task.getException()), Toast.LENGTH_SHORT).show();
                 btnLogin.setActivated(true);
                 btnLogin.setAlpha(1f);
             }

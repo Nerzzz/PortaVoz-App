@@ -1,14 +1,17 @@
 package com.example.portavoz.auth;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,9 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     ImageButton btnSeePsw;
     EditText etFName, etLName, etLogin, etPsw;
     Button btnRegister, btnReturn;
-
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    String APIResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +91,21 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 else if(!fName.matches("^([A-Za-z])+$") || !lName.matches("^([A-Za-z])+$")){
-                    Toast.makeText(RegisterActivity.this, "Nomes com caracteres inválidos.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Nomes com caracteres inválidos.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(psw.length() < 8){
-                    Toast.makeText(RegisterActivity.this, "Sua senha deve ter 8 caracteres.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Sua senha deve ter 8 caracteres.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (!psw.matches("^(?=.*[A-Z]).+$")){
-                    Toast.makeText(RegisterActivity.this, "Sua senha deve ter uma letra maiúscula", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Sua senha deve ter uma letra maiúscula", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else{
                     // Supostamente tudo certo
                     registerUser(fName, lName, login, psw);
-                    btnRegister.setActivated(false);
+                    btnRegister.setEnabled(false);
                     btnRegister.setAlpha(0.3f);
                 }
             }
@@ -127,6 +128,32 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 etPsw.setSelection(etPsw.getText().length());
+            }
+        });
+
+        ScrollView scrollView = findViewById(R.id.scroll);
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                scrollView.getWindowVisibleDisplayFrame(r);
+                int screenHeight = scrollView.getRootView().getHeight();
+
+                // r.bottom is the position above soft keypad or device button.
+                // if keypad is shown, the r.bottom is smaller than that before.
+                int keypadHeight = screenHeight - r.bottom;
+
+                if (keypadHeight > screenHeight * 0.15) { // 0.15 ratio is perhaps enough to determine keypad height.
+                    if(etLogin.isFocused()){
+                        scrollView.setTranslationY(keypadHeight*(-0.2f));
+                    }
+                    if(etPsw.isFocused()){
+                        scrollView.setTranslationY(keypadHeight*(-0.6f));
+                    }
+                }
+                else {
+                    scrollView.setTranslationY(0f);
+                }
             }
         });
     }
@@ -153,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             else{
                 Exception e = task.getException();
-                Toast.makeText(this, formatFirebaseException(e), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, formatFirebaseException(e), Toast.LENGTH_SHORT).show();
 
                 btnRegister.setActivated(true);
                 btnRegister.setAlpha(1f);
@@ -246,12 +273,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s){
-            // TODO: fazer alguma coisa com isso
-
-            Intent intent = new Intent(RegisterActivity.this, FeedActivity.class);
-            startActivity(intent);
-
-            APIResult = s;
+            startActivity(new Intent(RegisterActivity.this, FeedActivity.class));
+            finish();
         }
     }
 }

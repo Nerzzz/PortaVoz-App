@@ -5,15 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/bgColor"
     tools:context=".settings.AccountSettingsActivity">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:includeFontPadding="false"
+        android:text="Conta"
+        android:textColor="?attr/txtColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accSett_btnReturn" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,60 +45,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:fontFamily="@font/poppins"
-                android:gravity="center|left"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
                 android:includeFontPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Trocar E-mail da conta"
-                android:textColor="@color/black"
+                android:textColor="?attr/txtColor"
                 android:textSize="14sp"
                 app:icon="@drawable/ic_mail"
                 app:iconPadding="10dp"
-                app:iconTint="@color/black" />
+                app:iconTint="?attr/txtColor" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/accSett_btnChangePssw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:fontFamily="@font/poppins"
-                android:gravity="center|left"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
                 android:includeFontPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Atualizar senha"
-                android:textColor="@color/black"
+                android:textColor="?attr/txtColor"
                 android:textSize="14sp"
                 app:icon="@drawable/ic_key"
                 app:iconPadding="10dp"
-                app:iconTint="@color/black" />
+                app:iconTint="?attr/txtColor" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="?attr/terciaryNavColor"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accSett_btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Fazer logout"
+                android:textColor="?attr/txtColor"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_logout"
+                app:iconPadding="10dp"
+                app:iconTint="?attr/txtColor" />
         </LinearLayout>
     </ScrollView>
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/accSett_btnReturn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:tint="@color/gradienteCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="Voltar"
+        android:textColor="?attr/txtColor"
+        android:textSize="14sp"
+        app:backgroundTint="#00FFFFFF"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconPadding="0dp"
+        app:iconTint="?attr/txtColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_corner_down_left" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:includeFontPadding="false"
-        android:text="Conta"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accSett_btnReturn" />
+        app:rippleColor="#00FFFFFF" />
 </androidx.constraintlayout.widget.ConstraintLayout>
