@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,7 +54,6 @@ public class FeedActivity extends AppCompatActivity {
     RecyclerView timeLine;
     LinearLayoutManager linearLayoutManager;
     ArrayList<Post> posts = new ArrayList<>();
-    String userImageUrl;
     String token;
     ProgressBar loading;
     FloatingActionButton feed_fabReport;
@@ -177,6 +177,7 @@ public class FeedActivity extends AppCompatActivity {
                     JSONObject root = new JSONObject(APIResult_user);
 
                     JSONObject userObj = root.getJSONObject("user");
+
                     String userImage = userObj.getString("image");
 
                     Glide.with(FeedActivity.this)
@@ -186,7 +187,11 @@ public class FeedActivity extends AppCompatActivity {
                             .into(userPfpImage);
 
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signOut();
+                    startActivity(new Intent(FeedActivity.this, MainActivity.class));
+                    Toast.makeText(FeedActivity.this, "Usuário não encontrado/nulo", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         }

@@ -140,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (keypadHeight > screenHeight * 0.15) {
                 if(etFName.isFocused() || etLName.isFocused()) scrollView.setTranslationY(-0.3f);
-                if(etLogin.isFocused()) scrollView.setTranslationY(-0.3f);
+                if(etLogin.isFocused()) scrollView.setTranslationY(keypadHeight*(-0.3f));
                 if(etPsw.isFocused()) scrollView.setTranslationY(keypadHeight*(-0.6f));
             }
             else{
