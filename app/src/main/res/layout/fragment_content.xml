@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ContentFragment">
+    tools:context=".createPost.ContentFragment">
 
     <TextView
         android:id="@+id/textView11"
@@ -15,11 +15,11 @@
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/poppins"
         android:text="Conteúdo da denúncia"
-        app:layout_constraintBottom_toTopOf="@+id/report_Content"
+        app:layout_constraintBottom_toTopOf="@+id/edt_content"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/report_Title"
+        android:id="@+id/edt_title"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
@@ -35,7 +35,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textColorHint="@color/greyText"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/report_Content"
+        android:id="@+id/edt_content"
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_marginStart="10dp"
@@ -74,7 +74,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textColorHint="@color/greyText"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Título -->
     <TextView
         android:id="@+id/title_hashtags"
         android:layout_width="wrap_content"
@@ -17,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 1. Caixa de Exibição de Tags (com fundo arredondado) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tag_display_box"
         android:layout_width="0dp"
@@ -30,7 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_hashtags">
 
-        <!-- FlexboxLayout para exibir as tags dinamicamente -->
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexbox_tags_container"
             android:layout_width="match_parent"
@@ -43,7 +40,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- 2. Campo de Entrada e Botão de Adicionar -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,9 +49,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tag_display_box">
 
-        <!-- Campo de Entrada (EditText) -->
         <EditText
-            android:id="@+id/edit_text_hashtag"
+            android:id="@+id/edit_tag"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,7 +63,7 @@
 
         <ImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/add_button"
+            android:id="@+id/add_tag_button"
             android:layout_marginLeft="10dp"
             android:layout_width="54dp"
             android:layout_height="54dp"
@@ -80,7 +75,6 @@
             android:stateListAnimator="@null"
             app:srcCompat="@drawable/ic_plus"
             app:tint="@android:color/white"/>
-
 
     </LinearLayout>
 

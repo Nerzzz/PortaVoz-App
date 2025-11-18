@@ -47,6 +47,8 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.example.portavoz.createPost.CreatePost;
+
 public class FeedActivity extends AppCompatActivity {
 
     ImageView userPfpImage;
