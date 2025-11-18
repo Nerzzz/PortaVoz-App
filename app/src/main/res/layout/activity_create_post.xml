@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreatePost">
+    tools:context=".createPost.CreatePost">
 
     <ImageButton
-        android:id="@+id/cpost_btnReturn"
+        android:id="@+id/btnPrevious"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpost_btnReturn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPrevious" />
 
     <Button
         android:id="@+id/btnNext"
