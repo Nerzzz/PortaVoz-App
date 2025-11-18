@@ -132,28 +132,19 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         ScrollView scrollView = findViewById(R.id.scroll);
-        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Rect r = new Rect();
-                scrollView.getWindowVisibleDisplayFrame(r);
-                int screenHeight = scrollView.getRootView().getHeight();
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect r = new Rect();
+            scrollView.getWindowVisibleDisplayFrame(r);
+            int screenHeight = scrollView.getRootView().getHeight();
+            int keypadHeight = screenHeight - r.bottom;
 
-                // r.bottom is the position above soft keypad or device button.
-                // if keypad is shown, the r.bottom is smaller than that before.
-                int keypadHeight = screenHeight - r.bottom;
-
-                if (keypadHeight > screenHeight * 0.15) { // 0.15 ratio is perhaps enough to determine keypad height.
-                    if(etLogin.isFocused()){
-                        scrollView.setTranslationY(keypadHeight*(-0.2f));
-                    }
-                    if(etPsw.isFocused()){
-                        scrollView.setTranslationY(keypadHeight*(-0.6f));
-                    }
-                }
-                else {
-                    scrollView.setTranslationY(0f);
-                }
+            if (keypadHeight > screenHeight * 0.15) {
+                if(etFName.isFocused() || etLName.isFocused()) scrollView.setTranslationY(-0.3f);
+                if(etLogin.isFocused()) scrollView.setTranslationY(-0.3f);
+                if(etPsw.isFocused()) scrollView.setTranslationY(keypadHeight*(-0.6f));
+            }
+            else{
+                scrollView.setTranslationY(0f);
             }
         });
     }

@@ -50,7 +50,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center_horizontal"
                 android:includeFontPadding="false"
-                android:text="Que bom te ter aqui denovo! Insira seus dados:"
+                android:text="Que bom te ter aqui denovo! Entre em sua conta rapidamente com:"
                 android:textColor="?attr/primaryNavColor"
                 android:textSize="13sp" />
 
@@ -144,8 +144,10 @@
                     android:background="@drawable/bg_input_text"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="johndoe@email.com"
+                    android:imeOptions="actionDone"
                     android:includeFontPadding="false"
                     android:padding="15dp"
+                    android:singleLine="true"
                     android:textColor="?attr/txtColor"
                     android:textSize="15sp" />
 
@@ -179,9 +181,11 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="••••••••••••••"
+                        android:imeOptions="actionDone"
                         android:includeFontPadding="false"
                         android:inputType="textPassword"
                         android:padding="15dp"
+                        android:singleLine="true"
                         android:textColor="?attr/txtColor"
                         android:textSize="15sp" />
 

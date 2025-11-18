@@ -33,11 +33,11 @@
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center_horizontal"
-                android:text="Crie uma conta."
+                android:text="Bem-vindo! Vamos criar sua conta."
                 android:textColor="?attr/txtColor"
                 android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center_horizontal"
                 android:includeFontPadding="false"
-                android:text="Crie uma nova conta com:"
+                android:text="Faça seu cadastro rapidamente com:"
                 android:textColor="?attr/primaryNavColor"
                 android:textSize="13sp" />
 
@@ -108,7 +108,7 @@
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
-                    android:text="Ou Crie Com"
+                    android:text="Ou Cadastre Com"
                     android:textColor="?attr/secondaryNavColor"
                     android:textSize="13sp" />
 
@@ -148,8 +148,11 @@
                         android:background="@drawable/bg_input_text"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="John"
+                        android:imeOptions="actionDone"
                         android:includeFontPadding="false"
+                        android:inputType="text"
                         android:padding="15dp"
+                        android:singleLine="true"
                         android:textColor="?attr/txtColor"
                         android:textSize="15sp" />
 
@@ -181,8 +184,11 @@
                         android:background="@drawable/bg_input_text"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="Doe"
+                        android:imeOptions="actionDone"
                         android:includeFontPadding="false"
+                        android:inputType="text"
                         android:padding="15dp"
+                        android:singleLine="true"
                         android:textColor="?attr/txtColor"
                         android:textSize="15sp" />
 
@@ -211,8 +217,11 @@
                     android:background="@drawable/bg_input_text"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="johndoe@email.com"
+                    android:imeOptions="actionDone"
                     android:includeFontPadding="false"
+                    android:inputType="text"
                     android:padding="15dp"
+                    android:singleLine="true"
                     android:textColor="?attr/txtColor"
                     android:textSize="15sp" />
 
@@ -246,8 +255,9 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="••••••••••••••"
+                        android:imeOptions="actionDone"
                         android:includeFontPadding="false"
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:padding="15dp"
                         android:textColor="?attr/txtColor"
                         android:textSize="15sp" />
