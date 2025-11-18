@@ -430,23 +430,29 @@ public class PublicProfileActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s){
+        protected void onPostExecute(String s) {
 
-            if(s != null || !isCancelled()){
+            if (s != null || !isCancelled()) {
                 JSONObject jsonRoot;
+
+                Log.v("REPUBLICA TCHECOSLOVAQUIA", s);
+
                 try {
                     jsonRoot = new JSONObject(s);
 
-                    following = jsonRoot.getBoolean("isFollowing");
-                    Log.v("FOLLOWING", String.valueOf(following));
-
-                    if(jsonRoot.getBoolean("isFollowing")){
-                        btnFollow.setText("parar de seguir");
-                        btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_minus));
-                    }
-                    else{
+                    if (jsonRoot.isNull("isFollowing") || jsonRoot.get("isFollowing") == JSONObject.NULL) {
                         btnFollow.setText("seguir");
                         btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_plus));
+                    } else {
+                        JSONObject isFollowing = jsonRoot.getJSONObject("isFollowing");
+
+                        if (isFollowing.has("_id")) {
+                            btnFollow.setText("parar de seguir");
+                            btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_minus));
+                        } else {
+                            btnFollow.setText("seguir");
+                            btnFollow.setIcon(ContextCompat.getDrawable(PublicProfileActivity.this, R.drawable.ic_user_plus));
+                        }
                     }
 
                 } catch (JSONException e) {

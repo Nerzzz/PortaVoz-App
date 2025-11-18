@@ -32,8 +32,8 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageViewHolder>{
 
         Glide.with(holder.itemView.getContext())
                 .load(images.get(position))
-                .placeholder(R.color.placeholderColor)
-                .error(R.color.placeholderColor)
+                .placeholder(R.drawable.placeholder_color)
+                .error(R.drawable.placeholder_color)
                 .into(holder.image);
     }
 

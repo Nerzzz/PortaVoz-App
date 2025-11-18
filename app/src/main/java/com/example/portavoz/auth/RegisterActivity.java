@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     ImageButton btnSeePsw;
     EditText etFName, etLName, etLogin, etPsw;
     Button btnRegister, btnReturn;
+    TextView txtLogin;
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
@@ -59,6 +61,15 @@ public class RegisterActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        txtLogin = findViewById(R.id.register_txtLogin);
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                finish();
+            }
         });
 
         btnReturn = findViewById(R.id.register_btnReturn);

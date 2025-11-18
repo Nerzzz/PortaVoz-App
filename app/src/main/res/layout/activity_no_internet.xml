@@ -8,15 +8,16 @@
     android:background="?attr/bgColor"
     tools:context=".NoInternetActivity">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/noInternet_btnTryAgain"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/gradient_button"
-        android:fontFamily="@font/poppins_bold"
+        app:cornerRadius="12dp"
+        android:backgroundTint="@color/gradienteCenter"
+        android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="Tentar novamente"
@@ -45,7 +46,7 @@
             android:id="@+id/imageView6"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:tint="@color/gradienteCenter"
+            app:tint="@color/gradienteCenter"
             app:srcCompat="@drawable/ic_wifi_off" />
 
         <TextView

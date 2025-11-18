@@ -38,70 +38,29 @@
 
     <ImageButton
         android:id="@+id/feed_btnNotifications"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="10dp"
         android:background="#00FFFFFF"
         android:foregroundGravity="center"
         android:scaleType="center"
         android:src="@drawable/ic_bell"
-        android:tint="?attr/txtColor"
         app:layout_constraintBottom_toBottomOf="@+id/feed_imgUser"
         app:layout_constraintEnd_toStartOf="@+id/feed_imgUser"
-        app:layout_constraintTop_toTopOf="@+id/feed_imgUser" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_border"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingRight="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/feed_imgUser"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <EditText
-            android:id="@+id/feed_etSearch"
-            android:layout_width="wrap_content"
-            android:includeFontPadding="false"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:drawableLeft="@drawable/ic_mag"
-            android:drawableTint="?attr/primaryNavColor"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="@string/hintSearch"
-            android:inputType="text"
-            android:padding="15dp"
-            android:textColor="?attr/txtColor"
-            android:textColorHint="?attr/hintColor"
-            android:textSize="15sp" />
-
-        <ImageButton
-            android:id="@+id/feed_btnFilter"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/lay_rounded"
-            android:backgroundTint="?attr/terciaryNavColor"
-            android:backgroundTintMode="add"
-            app:srcCompat="@drawable/ic_slider"
-            app:tint="?attr/txtColor"/>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/feed_imgUser"
+        app:tint="?attr/txtColor" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed_recyTimeLine"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feed_imgUser"
         tools:itemCount="2"
         tools:listitem="@layout/layout_post" />
 
@@ -128,5 +87,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toTopOf="@+id/feed_recyTimeLine" />
+
+    <ImageButton
+        android:id="@+id/feed_btnSearch"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
+        android:foregroundGravity="center"
+        android:scaleType="center"
+        android:src="@drawable/ic_mag"
+        app:layout_constraintBottom_toBottomOf="@+id/feed_btnNotifications"
+        app:layout_constraintEnd_toStartOf="@+id/feed_btnNotifications"
+        app:layout_constraintTop_toTopOf="@+id/feed_btnNotifications"
+        app:tint="?attr/txtColor" />
+
+    <ImageButton
+        android:id="@+id/feed_btnChat"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
+        android:foregroundGravity="center"
+        android:scaleType="center"
+        android:src="@drawable/ic_message"
+        app:layout_constraintBottom_toBottomOf="@+id/feed_btnSearch"
+        app:layout_constraintEnd_toStartOf="@+id/feed_btnSearch"
+        app:layout_constraintTop_toTopOf="@+id/feed_btnSearch"
+        app:tint="?attr/txtColor" />
 </androidx.constraintlayout.widget.ConstraintLayout>
