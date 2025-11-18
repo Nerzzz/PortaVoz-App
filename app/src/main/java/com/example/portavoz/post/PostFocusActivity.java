@@ -2,12 +2,15 @@ package com.example.portavoz.post;
 
 import static android.view.View.INVISIBLE;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -37,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
@@ -46,12 +51,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,13 +69,16 @@ import javax.net.ssl.HttpsURLConnection;
 public class PostFocusActivity extends AppCompatActivity {
 
     Post userPost;
-    Button btnReturn, btnLike, btnComment;
+
+    MaterialButton btnReturn, btnLike, btnComment;
     ImageButton btnMap, btnOptions;
     TextView txtDisplayName, txtDate, txtTitle, txtDesc, txtTags;
     RecyclerView rcImages;
     ImageView imgUserPost, imgCurrentUser;
     ConstraintLayout post;
     ProgressBar loadingPost;
+
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +107,24 @@ public class PostFocusActivity extends AppCompatActivity {
         });
 
         btnLike = findViewById(R.id.post_btnLike);
+        btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btnLike.setActivated(false);
+                btnLike.setAlpha(0.6f);
+
+                mUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if(task.isSuccessful()){
+
+                        }
+                    }
+                });
+            }
+        });
+
         btnComment = findViewById(R.id.post_btnComment);
 
         btnMap = findViewById(R.id.post_btnMap);
@@ -143,7 +173,7 @@ public class PostFocusActivity extends AppCompatActivity {
         imgUserPost = findViewById(R.id.post_imgUser);
         imgCurrentUser = findViewById(R.id.post_imgCurrentUser);
 
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         mUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                     @Override
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
@@ -266,9 +296,12 @@ public class PostFocusActivity extends AppCompatActivity {
             }
         }
 
+        @SuppressLint("ResourceAsColor")
         @Override
         protected void onPostExecute(String s) {
             if (s != null) {
+                Log.v("API RESPONSE", s);
+
                 try {
                     JSONObject root = new JSONObject(s);
                     JSONObject postObj = root.getJSONObject("post");
@@ -292,6 +325,13 @@ public class PostFocusActivity extends AppCompatActivity {
 
                     boolean hasMore = root.has("hasMore") && root.getBoolean("hasMore");
                     boolean isUpvoted = postObj.has("isUpvoted") && postObj.getBoolean("isUpvoted");
+
+                    if(isUpvoted){
+                        Log.v("ISUPVOTED", String.valueOf(isUpvoted));
+                    }
+                    else{
+                        Log.v("ISUPVOTED", String.valueOf(isUpvoted));
+                    }
 
                     // images
                     JSONArray imagesJson = postObj.getJSONArray("images");
@@ -361,11 +401,35 @@ public class PostFocusActivity extends AppCompatActivity {
                     rcImages.setAdapter(new PostImageAdapter(userPost.images));
 
                     PagerSnapHelper snapHelper = new PagerSnapHelper();
+                    if (rcImages.getOnFlingListener() != null) {
+                        rcImages.setOnFlingListener(null);
+                    }
                     snapHelper.attachToRecyclerView(rcImages);
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+
+                if(userPost.isUpvoted){
+                    btnLike.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(PostFocusActivity.this, R.color.orangeAscend)));
+                    btnLike.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(PostFocusActivity.this, R.color.orangeAscend)));
+                    btnLike.setIconTint(ColorStateList.valueOf(ContextCompat.getColor(PostFocusActivity.this, R.color.orangeAscend)));
+                }
+                else{
+                    TypedValue typedValue = new TypedValue();
+                    PostFocusActivity.this.getTheme().resolveAttribute(R.attr.primaryNavColor, typedValue, true);
+                    int color = typedValue.data;
+
+                    PostFocusActivity.this.getTheme().resolveAttribute(R.attr.border1, typedValue, true);
+                    int border = typedValue.data;
+
+                    btnLike.setTextColor(color);
+                    btnLike.setIconTint(ColorStateList.valueOf(color));
+                    btnLike.setStrokeColor(ColorStateList.valueOf(border));
+                }
+
+                btnLike.setActivated(true);
+                btnLike.setAlpha(1f);
 
                 loadingPost.setVisibility(INVISIBLE);
                 post.setVisibility(View.VISIBLE);

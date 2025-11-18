@@ -3,12 +3,15 @@ package com.example.portavoz.post;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,10 +45,32 @@ public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.username.setText(posts.get(position).username);
         holder.created.setText(posts.get(position).created);
+
         holder.likes.setText(String.valueOf(posts.get(position).likes));
+        if(posts.get(position).isUpvoted){
+            holder.likes.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(holder.itemView.getContext(), R.color.orangeAscend)));
+            holder.likes.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(holder.itemView.getContext(), R.color.orangeAscend)));
+            holder.likes.setIconTint(ColorStateList.valueOf(ContextCompat.getColor(holder.itemView.getContext(), R.color.orangeAscend)));
+        }
+        else{
+            TypedValue typedValue = new TypedValue();
+            holder.itemView.getContext().getTheme().resolveAttribute(R.attr.primaryNavColor, typedValue, true);
+            int color = typedValue.data;
+
+            holder.itemView.getContext().getTheme().resolveAttribute(R.attr.border1, typedValue, true);
+            int border = typedValue.data;
+
+            holder.likes.setTextColor(color);
+            holder.likes.setIconTint(ColorStateList.valueOf(color));
+            holder.likes.setStrokeColor(ColorStateList.valueOf(border));
+        }
+
         holder.comments.setText(String.valueOf(posts.get(position).comments));
         holder.title.setText(posts.get(position).title);
         holder.desc.setText(posts.get(position).desc);
+
+        holder.isUpvoted = posts.get(position).isUpvoted;
+        holder.upVotesCount = posts.get(position).likes;
 
         holder.userId = posts.get(position).userId;
         holder.postId = posts.get(position).id_;

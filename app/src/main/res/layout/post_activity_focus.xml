@@ -52,198 +52,205 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/post"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_btnReturn">
 
-        <ImageView
-            android:id="@+id/post_imgUser"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user_image_placeholder" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/post_imgUser"
-            app:layout_constraintEnd_toStartOf="@+id/post_btnOptions"
-            app:layout_constraintStart_toEndOf="@+id/post_imgUser"
-            app:layout_constraintTop_toTopOf="@+id/post_imgUser">
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_btnReturn">
+
+            <ImageView
+                android:id="@+id/post_imgUser"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user_image_placeholder" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/post_imgUser"
+                app:layout_constraintEnd_toStartOf="@+id/post_btnOptions"
+                app:layout_constraintStart_toEndOf="@+id/post_imgUser"
+                app:layout_constraintTop_toTopOf="@+id/post_imgUser">
+
+                <TextView
+                    android:id="@+id/post_txtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/dataPlace"
+                    android:textColor="?attr/txtColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/post_txtPostDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/datePlace"
+                    android:textColor="?attr/primaryNavColor"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/post_carousel"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                tools:listitem="@layout/layout_post_image" />
+
+            <ImageButton
+                android:id="@+id/post_btnOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#00FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/post_imgUser"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/post_imgUser"
+                app:srcCompat="@drawable/ic_dots_vertical"
+                app:tint="?attr/secondaryNavColor" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_carousel">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/post_btnLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_arrow_big_up"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="?attr/primaryNavColor"
+                    android:elegantTextHeight="false"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="0"
+                    android:textColor="?attr/primaryNavColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#00000000"
+                    app:cornerRadius="100dp"
+                    app:iconSize="14sp"
+                    app:strokeColor="?attr/border1"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/post_btnComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableLeft="@drawable/ic_message"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="?attr/primaryNavColor"
+                    android:elegantTextHeight="false"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="0"
+                    android:textColor="?attr/primaryNavColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#00000000"
+                    app:cornerRadius="100dp"
+                    app:iconSize="14sp"
+                    app:strokeColor="?attr/border1"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/post_btnMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="center"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+                app:srcCompat="@drawable/ic_map"
+                app:tint="@color/gradiente2" />
 
             <TextView
-                android:id="@+id/post_txtUsername"
-                android:layout_width="match_parent"
+                android:id="@+id/post_txtTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dataPlace"
                 android:textColor="?attr/txtColor"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/post_btnMap"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
             <TextView
-                android:id="@+id/post_txtPostDate"
-                android:layout_width="match_parent"
+                android:id="@+id/post_txtDesc"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
-                android:text="@string/datePlace"
-                android:textColor="?attr/primaryNavColor"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/post_carousel"
-            android:layout_width="0dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            tools:listitem="@layout/layout_post_image" />
-
-        <ImageButton
-            android:id="@+id/post_btnOptions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@+id/post_imgUser"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/post_imgUser"
-            app:srcCompat="@drawable/ic_dots_vertical"
-            app:tint="?attr/secondaryNavColor" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_carousel">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/post_btnLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_arrow_big_up"
-                android:drawablePadding="10dp"
-                android:drawableTint="?attr/primaryNavColor"
-                android:elegantTextHeight="false"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical|center_horizontal"
-                android:includeFontPadding="false"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="0"
-                android:textColor="?attr/primaryNavColor"
+                android:text="Lorem impsium sit dolor armet"
+                android:textColor="?attr/txtColor"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                app:backgroundTint="#00000000"
-                app:cornerRadius="100dp"
-                app:iconSize="14sp"
-                app:strokeColor="?attr/border1"
-                app:strokeWidth="1dp" />
+                app:layout_constraintEnd_toEndOf="@+id/post_txtTitle"
+                app:layout_constraintStart_toStartOf="@+id/post_txtTitle"
+                app:layout_constraintTop_toBottomOf="@+id/post_txtTitle" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/post_btnComment"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/post_txtHastags"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:drawableLeft="@drawable/ic_message"
-                android:drawablePadding="10dp"
-                android:drawableTint="?attr/primaryNavColor"
-                android:elegantTextHeight="false"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical|center_horizontal"
-                android:includeFontPadding="false"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="0"
-                android:textColor="?attr/primaryNavColor"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/poppins"
+                android:text="#lorem #impsium"
+                android:textColor="@color/gradiente2"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                app:backgroundTint="#00000000"
-                app:cornerRadius="100dp"
-                app:iconSize="14sp"
-                app:strokeColor="?attr/border1"
-                app:strokeWidth="1dp" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/post_txtDesc"
+                app:layout_constraintStart_toStartOf="@+id/post_txtDesc"
+                app:layout_constraintTop_toBottomOf="@+id/post_txtDesc" />
 
-        <ImageButton
-            android:id="@+id/post_btnMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="center"
-            android:tint="@color/gradiente2"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout4"
-            app:srcCompat="@drawable/ic_map" />
-
-        <TextView
-            android:id="@+id/post_txtTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/dataPlace"
-            android:textColor="?attr/txtColor"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/post_btnMap"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-        <TextView
-            android:id="@+id/post_txtDesc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/poppins"
-            android:text="Lorem impsium sit dolor armet"
-            android:textColor="?attr/txtColor"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/post_txtTitle"
-            app:layout_constraintStart_toStartOf="@+id/post_txtTitle"
-            app:layout_constraintTop_toBottomOf="@+id/post_txtTitle" />
-
-        <TextView
-            android:id="@+id/post_txtHastags"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/poppins"
-            android:text="#lorem #impsium"
-            android:textColor="@color/gradiente2"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/post_txtDesc"
-            app:layout_constraintStart_toStartOf="@+id/post_txtDesc"
-            app:layout_constraintTop_toBottomOf="@+id/post_txtDesc" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

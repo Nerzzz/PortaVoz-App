@@ -434,9 +434,6 @@ public class PublicProfileActivity extends AppCompatActivity {
 
             if (s != null || !isCancelled()) {
                 JSONObject jsonRoot;
-
-                Log.v("REPUBLICA TCHECOSLOVAQUIA", s);
-
                 try {
                     jsonRoot = new JSONObject(s);
 
