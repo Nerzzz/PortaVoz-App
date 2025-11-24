@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.portavoz.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -121,6 +122,60 @@ public class CreatePost extends AppCompatActivity {
         return compressedFile;
     }
 
+    private void validate(String stage, Runnable onSuccess) {
+        MediaType textPlain = MediaType.parse("text/plain");
+        RequestBody rbTitle = RequestBody.create(viewModel.getTitle().getValue(), textPlain);
+        RequestBody rbDesc = RequestBody.create(viewModel.getDescription().getValue(), textPlain);
+
+        List<MultipartBody.Part> imageParts = new ArrayList<>();
+        if (stage.equals("images") && viewModel.getImagePaths().getValue() != null) {
+            for (String uri : viewModel.getImagePaths().getValue()) {
+                try {
+                    File file = compressImage(this, Uri.parse(uri));
+                    RequestBody reqFile = RequestBody.create(file, MediaType.parse("image/*"));
+                    imageParts.add(MultipartBody.Part.createFormData("images", file.getName(), reqFile));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        List<MultipartBody.Part> hashtagParts = new ArrayList<>();
+        if (stage.equals("hashtags") && viewModel.getHashtags().getValue() != null) {
+            for (String tag : viewModel.getHashtags().getValue()) {
+                hashtagParts.add(MultipartBody.Part.createFormData("hashtags", tag));
+            }
+        }
+
+        RetrofitClient.getInstance()
+                .getValidationService()
+                .validateStage(stage, rbTitle, rbDesc, imageParts, hashtagParts)
+                .enqueue(new Callback<ValidationResponse>() {
+                    @Override
+                    public void onResponse(Call<ValidationResponse> call, Response<ValidationResponse> response) {
+
+                        Log.e("VALIDATE_DEBUG", "Status code: " + response.code());
+
+                        if (response.isSuccessful()) {
+                            ValidationResponse res = response.body();
+                            Log.e("VALIDATE_DEBUG", "Corpo da resposta: " + new Gson().toJson(res));
+                        } else {
+                            try {
+                                Log.e("VALIDATE_DEBUG", "Erro da API: " + response.errorBody().string());
+                            } catch (Exception e) {
+                                Log.e("VALIDATE_DEBUG", "Erro lendo o corpo de erro", e);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ValidationResponse> call, Throwable t) {
+                        Log.e("VALIDATE_DEBUG", "Falha da requisição", t);
+                    }
+                });
+
+    }
+
     private void enviarParaApi() {
         String title = viewModel.getTitle().getValue();
         String desc = viewModel.getDescription().getValue();
@@ -183,22 +238,20 @@ public class CreatePost extends AppCompatActivity {
 
                     String token = "Bearer " + task.getResult().getToken();
 
-                    // CAMPOS DE TEXTO SIMPLES (usando text/plain)
+                    // CAMPOS DE TEXTO SIMPLES
                     MediaType textPlain = MediaType.parse("text/plain");
                     RequestBody rbTitle = RequestBody.create(title, textPlain);
                     RequestBody rbDesc = RequestBody.create(desc, textPlain);
                     RequestBody rbAddress = RequestBody.create(address, textPlain);
                     RequestBody rbStatus = RequestBody.create("ativo", textPlain);
 
-                    // LOCATION (Enviando latitude e longitude como campos separados)
+                    // LOCATION
                     RequestBody rbLatitude = RequestBody.create(String.valueOf(lat), textPlain);
                     RequestBody rbLongitude = RequestBody.create(String.valueOf(lon), textPlain);
 
-                    // HASHTAGS (CORRIGIDO: Enviando como múltiplas partes)
+                    // HASHTAGS
                     List<MultipartBody.Part> hashtagParts = new ArrayList<>();
                     for (String tag : hashtags) {
-                        // O nome do campo deve ser "hashtags[]" ou apenas "hashtags"
-                        // Usaremos "hashtags" e o Retrofit/OkHttp irá tratar como array
                         hashtagParts.add(MultipartBody.Part.createFormData("hashtags", tag));
                     }
 
