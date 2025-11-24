@@ -30,7 +30,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends BaseActivity {
 
-    Button btnLogin, btnReturn, login_btnGoogle;
+    Button btnLogin, btnReturn;
+    ImageButton login_btnGoogle;
     ImageButton btnSeePsw;
     EditText etLogin, etPsw;
     TextView txtForgotPssw, txtRegister;

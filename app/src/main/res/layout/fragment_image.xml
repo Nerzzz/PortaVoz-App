@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".createPost.ContentFragment">
+    tools:context=".createPost.ContentFragment"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/uploadLayout"
@@ -27,6 +28,7 @@
             android:layout_height="63dp"
             android:layout_gravity="center"
             android:contentDescription="upload icon"
+            android:tint="?attr/txtColor"
             app:srcCompat="@drawable/upload_rezised" />
 
         <TextView
@@ -34,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="clique aqui para adicionar uma imagem"
-            android:textColor="@color/black" />
+            android:textColor="?attr/txtColor" />
     </LinearLayout>
 
     <TextView

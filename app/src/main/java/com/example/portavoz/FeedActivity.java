@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.portavoz.post.PostFeedAdapter;
@@ -59,6 +60,7 @@ public class FeedActivity extends AppCompatActivity {
     String token;
     ProgressBar loading;
     FloatingActionButton feed_fabReport;
+    SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,6 @@ public class FeedActivity extends AppCompatActivity {
         });
 
         userPfpImage = findViewById(R.id.feed_imgUser);
-
         userPfpImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +98,14 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        swipeRefresh.setOnRefreshListener(() -> {
+            posts.clear();
+            getUserToken();
+        });
+
         getUserToken();
+
     }
 
     public void getUserToken(){
@@ -331,12 +339,15 @@ public class FeedActivity extends AppCompatActivity {
 
                     loading.setVisibility(INVISIBLE);
 
+                    swipeRefresh.setRefreshing(false);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             } else {
                 Log.e("API_RESPONSE", "Resposta nula da API");
             }
+            swipeRefresh.setRefreshing(false);
         }
     }
 }

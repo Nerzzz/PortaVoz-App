@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:clipToPadding="false"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:background="@android:color/transparent">
 
     <TextView
         android:id="@+id/text_title_section"
@@ -36,7 +37,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:autofillHints=""
-        android:background="@drawable/btn_border"
+        android:background="@drawable/bg_input_text"
         android:ems="10"
         android:fontFamily="@font/poppins"
         android:hint="Ex: Av. Dr. João Conceição"

@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createPost.CreatePost">
+    tools:context=".createPost.CreatePost"
+    android:background="?attr/bgColor2">
 
     <ImageButton
         android:id="@+id/btnPrevious"
@@ -29,16 +30,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPrevious" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNext"
         android:layout_width="219dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="84dp"
-        android:background="@drawable/gradient_button"
+        android:backgroundTint="@color/gradienteCenter"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:text="Próximo"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp"
         android:textSize="15dp"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"

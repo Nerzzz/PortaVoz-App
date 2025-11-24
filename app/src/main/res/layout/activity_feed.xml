@@ -50,8 +50,8 @@
         app:layout_constraintTop_toTopOf="@+id/feed_imgUser"
         app:tint="?attr/txtColor" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/feed_recyTimeLine"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -60,9 +60,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feed_imgUser"
-        tools:itemCount="2"
-        tools:listitem="@layout/layout_post" />
+        app:layout_constraintTop_toBottomOf="@+id/feed_imgUser">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feed_recyTimeLine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="2"
+            tools:listitem="@layout/layout_post" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/feed_fabReport"
@@ -71,6 +78,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:clickable="true"
+        android:contentDescription="botão clicar"
         android:scaleType="centerInside"
         app:backgroundTint="@color/gradiente2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/feed_recyTimeLine" />
+        app:layout_constraintTop_toTopOf="@+id/swipe_refresh" />
 
     <ImageButton
         android:id="@+id/feed_btnSearch"

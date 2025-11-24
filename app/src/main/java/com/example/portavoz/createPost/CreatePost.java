@@ -71,7 +71,10 @@ public class CreatePost extends AppCompatActivity {
             if (curFragment < 4) {
                 curFragment++;
                 showFragment(curFragment);
+
             } else {
+                btnNext.setEnabled(false);
+                btnNext.setAlpha(0.6f);
                 enviarParaApi();
             }
         });
@@ -188,44 +191,60 @@ public class CreatePost extends AppCompatActivity {
         // VALIDAÇÕES OBRIGATÓRIAS
         if (title == null || title.isEmpty()) {
             Toast.makeText(this, "Preencha o título!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         if (desc == null || desc.isEmpty()) {
             Toast.makeText(this, "Preencha a descrição!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         if (lat == null || lon == null) {
             Toast.makeText(this, "Selecione uma localização!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         if (address == null || address.isEmpty()) {
             Toast.makeText(this, "Preencha o endereço!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         // VALIDAÇÃO DE HASHTAGS (OBRIGATÓRIO)
         if (hashtags == null || hashtags.isEmpty()) {
             Toast.makeText(this, "Adicione pelo menos uma hashtag!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         // VALIDAÇÃO DE COORDENADAS
         if (lat < -90 || lat > 90) {
             Toast.makeText(this, "Latitude inválida! Deve estar entre -90 e 90.", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         if (lon < -180 || lon > 180) {
             Toast.makeText(this, "Longitude inválida! Deve estar entre -180 e 180.", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
         // VALIDAÇÃO DE LIMITE DE IMAGENS
         if (imageUris != null && imageUris.size() > 3) {
             Toast.makeText(this, "Máximo de 3 imagens permitidas!", Toast.LENGTH_LONG).show();
+            btnNext.setEnabled(true);
+            btnNext.setAlpha(1f);
             return;
         }
 
@@ -233,6 +252,8 @@ public class CreatePost extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
                         Toast.makeText(this, "Falha ao obter token", Toast.LENGTH_LONG).show();
+                        btnNext.setEnabled(true);
+                        btnNext.setAlpha(1f);
                         return;
                     }
 
@@ -257,16 +278,23 @@ public class CreatePost extends AppCompatActivity {
 
                     // IMAGENS
                     List<MultipartBody.Part> imageParts = new ArrayList<>();
+
                     if (imageUris != null && !imageUris.isEmpty()) {
                         for (String uri : imageUris) {
                             try {
-                                File file = compressImage(this, Uri.parse(uri));
-                                RequestBody reqFile = RequestBody.create(file, MediaType.parse("image/*"));
+                                Uri imageUri = Uri.parse(uri);
+                                File file = compressImage(this, imageUri);
+                                String mimeType = getContentResolver().getType(imageUri);
+                                if (mimeType == null) mimeType = "image/jpeg";
+
+                                RequestBody reqFile = RequestBody.create(file, MediaType.parse(mimeType));
+
                                 MultipartBody.Part part = MultipartBody.Part.createFormData(
                                         "images",
                                         file.getName(),
                                         reqFile
                                 );
+
                                 imageParts.add(part);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -299,11 +327,16 @@ public class CreatePost extends AppCompatActivity {
                                         try {
                                             String error = response.errorBody().string();
                                             Log.e("API_ERROR", "Código: " + response.code() + " | Erro: " + error);
-                                            Toast.makeText(CreatePost.this, "Erro: " + error, Toast.LENGTH_LONG).show();
+                                            if (response.code() == 500) {
+                                                Toast.makeText(CreatePost.this, "Conteúdo não relacionado a infraestrutura. | Hashtags fora de contexto ou inapropriadas. | Imagem fora de contexto da denúncia",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                             Toast.makeText(CreatePost.this, "Erro desconhecido", Toast.LENGTH_LONG).show();
                                         }
+                                        btnNext.setEnabled(true);
+                                        btnNext.setAlpha(1f);
                                     }
                                 }
 
