@@ -1,5 +1,7 @@
 package com.example.portavoz.post.comments;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Comment {
 
     public String id;
@@ -9,14 +11,19 @@ public class Comment {
 
     public ParentType parentType;
 
-    public String userId;
-    public String userName;
-    public String userImage;
+    @SerializedName("user")
+    public UserData user;
 
     public int repliesCount;
     public boolean isUpvoted;
 
     public String createdAt;
+
+    public static class UserData {
+        public String id;
+        public String username;
+        public String image;
+    }
 
     public enum ParentType {
         POST("Post"),
@@ -40,27 +47,5 @@ public class Comment {
             }
             return null;
         }
-    }
-
-
-    public Comment(String id, String parentId, ParentType parentType,
-                   String content, String userId, String userName, String userImage,
-                   int repliesCount, boolean isUpvoted, String createdAt) {
-
-        //data
-        this.id = id;
-        this.parentId = parentId;
-        this.parentType = parentType;
-        this.content = content;
-
-        //credenciais
-        this.userId = userId;
-        this.userName = userName;
-        this.userImage = userImage;
-
-        //outros
-        this.repliesCount = repliesCount;
-        this.isUpvoted = isUpvoted;
-        this.createdAt = createdAt;
     }
 }

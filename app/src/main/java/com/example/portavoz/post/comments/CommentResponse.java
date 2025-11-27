@@ -2,21 +2,23 @@ package com.example.portavoz.post.comments;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 
 public class CommentResponse {
-    @SerializedName("message")
-    private String message;
+    @SerializedName("comments")
+    private List<Comment> comments;
 
-    @SerializedName("data")
-    private Object data;
+    @SerializedName("hasMore")
+    private boolean hasMore;
 
-    public String getMessage() {
-        return message;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public Object getData() {
-        return data;
+    public boolean hasMore() {
+        return hasMore;
     }
 }

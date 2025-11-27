@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.portavoz.FormatTime;
 import com.example.portavoz.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapView;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
     ArrayList<Post> posts;
+    FormatTime formatTime = new FormatTime();
 
     public PostFeedAdapter(ArrayList<Post> p, Context ctx){
         posts = p;
@@ -44,7 +46,7 @@ public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.username.setText(posts.get(position).username);
-        holder.created.setText(posts.get(position).created);
+        holder.created.setText(formatTime.formatTimeAgo(posts.get(position).created));
 
         holder.likes.setText(String.valueOf(posts.get(position).likes));
         if(posts.get(position).isUpvoted){

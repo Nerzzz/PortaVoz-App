@@ -31,7 +31,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     String id, parentId;
     Boolean isUpvoted;
     Vote vote = new Vote();
-    int
 
     public CommentViewHolder(@NonNull View itemView) {
         super(itemView);

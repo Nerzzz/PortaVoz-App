@@ -107,7 +107,12 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BottomSheetFragment bottomSheetFragment = new BottomSheetFragment().newInstance(postId);
 
+                androidx.fragment.app.FragmentActivity activity =
+                        (androidx.fragment.app.FragmentActivity) itemView.getContext();
+
+                bottomSheetFragment.show(activity.getSupportFragmentManager(), "comments");
             }
         });
 
