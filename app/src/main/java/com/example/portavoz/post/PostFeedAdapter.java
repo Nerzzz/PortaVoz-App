@@ -120,6 +120,7 @@ public class PostFeedAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 mapView.onResume();
             }
         });
+
     }
 
     @Override

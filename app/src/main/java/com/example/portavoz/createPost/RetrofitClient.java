@@ -1,5 +1,8 @@
 package com.example.portavoz.createPost;
 
+import com.example.portavoz.post.vote.Vote;
+import com.example.portavoz.post.vote.VoteService;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -11,6 +14,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
 
     private PostService postService;
+    private VoteService voteService;
     private PostValidationService postValidationService;
 
     private final OkHttpClient okHttpClient;
@@ -31,6 +35,7 @@ public class RetrofitClient {
 
         postService = retrofit.create(PostService.class);
         postValidationService = retrofit.create(PostValidationService.class);
+        voteService = retrofit.create(VoteService.class);
     }
 
     public static synchronized RetrofitClient getInstance() {
@@ -47,4 +52,8 @@ public class RetrofitClient {
     public PostValidationService getValidationService() {
         return postValidationService;
     }
+
+    public VoteService getVoteService() { return voteService; }
+
+
 }

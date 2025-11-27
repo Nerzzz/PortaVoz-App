@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.portavoz.R;
 
 import java.io.File;
@@ -64,47 +65,47 @@ public class imageFragment extends Fragment {
 
         galleryLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult o) {
-                if (o.getResultCode() == Activity.RESULT_OK && o.getData() != null) {
-                    Intent data = o.getData();
+                    @Override
+                    public void onActivityResult(ActivityResult o) {
+                        if (o.getResultCode() == Activity.RESULT_OK && o.getData() != null) {
+                            Intent data = o.getData();
 
-                    if (data.getClipData() != null) {
-                        int count = data.getClipData().getItemCount();
-                        for (int i = 0; i < count && selectedImages.size() < MAX_IMAGES; i++) {
-                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                            selectedImages.add(imageUri);
-                        }
-                    } else if (data.getData() != null) {
-                        Uri imageUri = data.getData();
-                        if (selectedImages.size() < MAX_IMAGES) {
-                            selectedImages.add(imageUri);
+                            if (data.getClipData() != null) {
+                                int count = data.getClipData().getItemCount();
+                                for (int i = 0; i < count && selectedImages.size() < MAX_IMAGES; i++) {
+                                    Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                                    selectedImages.add(imageUri);
+                                }
+                            } else if (data.getData() != null) {
+                                Uri imageUri = data.getData();
+                                if (selectedImages.size() < MAX_IMAGES) {
+                                    selectedImages.add(imageUri);
+                                }
+                            }
+                            displayImages();
+                            updateViewModelImage();
                         }
                     }
-                    displayImages();
-                    updateViewModelImage();
-                }
-            }
-        });
+                });
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult o) {
-                if (o.getResultCode() == Activity.RESULT_OK) {
-                    if (cameraImageUri != null) {
-                        if (selectedImages.size() < MAX_IMAGES) {
-                            selectedImages.add(cameraImageUri);
-                            displayImages();
-                            updateViewModelImage();
-                        } else {
-                            Toast.makeText(getContext(), "você atingiu o número máximo de imagens permitidas",
-                                    Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onActivityResult(ActivityResult o) {
+                        if (o.getResultCode() == Activity.RESULT_OK) {
+                            if (cameraImageUri != null) {
+                                if (selectedImages.size() < MAX_IMAGES) {
+                                    selectedImages.add(cameraImageUri);
+                                    displayImages();
+                                    updateViewModelImage();
+                                } else {
+                                    Toast.makeText(getContext(), "você atingiu o número máximo de imagens permitidas",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         }
                     }
-                }
-            }
-        });
+                });
 
         requestLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
@@ -170,26 +171,34 @@ public class imageFragment extends Fragment {
         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePicture.resolveActivity(getActivity().getPackageManager()) != null) {
-            File photoFile = null;
+            File photoFile;
             try {
                 photoFile = createImageFile();
+                if (!photoFile.exists()) {
+                    photoFile.createNewFile();
+                }
             } catch (IOException e) {
                 Toast.makeText(getContext(), "Erro ao criar arquivo para foto.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if (photoFile != null) {
-                cameraImageUri = FileProvider.getUriForFile(
-                        getContext(),
-                        "com.example.portavoz.fileprovider",
-                        photoFile
-                );
+            cameraImageUri = FileProvider.getUriForFile(
+                    getContext(),
+                    "com.example.portavoz.fileprovider",
+                    photoFile
+            );
 
-                takePicture.putExtra(MediaStore.EXTRA_OUTPUT, cameraImageUri);
-                takePicture.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            takePicture.putExtra(MediaStore.EXTRA_OUTPUT, cameraImageUri);
+            takePicture.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            takePicture.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-                cameraLauncher.launch(takePicture);
-            }
+            getActivity().grantUriPermission(
+                    "com.android.camera",
+                    cameraImageUri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION
+            );
+
+            cameraLauncher.launch(takePicture);
         }
     }
 
@@ -199,13 +208,11 @@ public class imageFragment extends Fragment {
 
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-        File image = File.createTempFile(
+        return File.createTempFile(
                 imageFileName,
                 ".jpg",
                 storageDir
         );
-
-        return image;
     }
 
     private void showImageDialog() {
@@ -241,7 +248,9 @@ public class imageFragment extends Fragment {
             );
             imageView.setLayoutParams(imageParams);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setImageURI(uri);
+            Glide.with(this)
+                    .load(uri)
+                    .into(imageView);
 
             // Cantos arredondados
             GradientDrawable drawable = new GradientDrawable();

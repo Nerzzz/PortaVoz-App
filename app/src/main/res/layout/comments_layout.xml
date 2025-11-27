@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@android:color/transparent"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/comment_userPfp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded"
+        android:clipToOutline="true"
+        app:srcCompat="@drawable/user_image_placeholder"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp" />
+
+    <TextView
+        android:id="@+id/comment_userName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:includeFontPadding="false"
+        android:text="placeholder"
+        android:textColor="?attr/txtColor"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comment_userPfp"
+        app:layout_constraintTop_toTopOf="@+id/comment_userPfp" />
+
+    <TextView
+        android:id="@+id/comment_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="placeholder"
+        android:textColor="?attr/secondaryNavColor"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_userPfp"
+        app:layout_constraintEnd_toEndOf="@+id/comment_userName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/comment_userName"
+        app:layout_constraintTop_toBottomOf="@+id/comment_userName" />
+
+    <TextView
+        android:id="@+id/comment_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="placeholder"
+        app:layout_constraintEnd_toEndOf="@+id/comment_date"
+        app:layout_constraintStart_toStartOf="@+id/comment_userPfp"
+        app:layout_constraintTop_toBottomOf="@+id/comment_userPfp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="?attr/txtColor"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:textSize="13sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/comment_btnLike"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="?attr/terciaryNavColor"
+        android:text="1"
+        android:textColor="?attr/txtColor"
+        android:textSize="10sp"
+        app:icon="@drawable/ic_thumb_up"
+        app:iconPadding="0dp"
+        app:iconSize="15sp"
+        app:iconTint="?attr/txtColor"
+        app:layout_constraintStart_toStartOf="@+id/comment_content"
+        app:layout_constraintTop_toBottomOf="@+id/comment_content" />
+
+    <TextView
+        android:id="@+id/comment_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Responder"
+        android:textColor="?attr/secondaryNavColor"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_btnLike"
+        app:layout_constraintStart_toEndOf="@+id/comment_btnLike"
+        app:layout_constraintTop_toTopOf="@+id/comment_btnLike"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/comment_showMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="Ver mais"
+        android:textColor="?attr/secondaryNavColor"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_btnLike"
+        app:layout_constraintEnd_toEndOf="@+id/comment_content"
+        app:layout_constraintTop_toTopOf="@+id/comment_btnLike" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_responses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/comment_showMore"
+        app:layout_constraintStart_toStartOf="@+id/comment_btnLike"
+        app:layout_constraintTop_toBottomOf="@+id/comment_btnLike" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
