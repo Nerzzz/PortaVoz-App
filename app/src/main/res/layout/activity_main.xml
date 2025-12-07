@@ -108,7 +108,7 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/main_loginGoogle"
+                android:id="@+id/main_btnGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:backgroundTint="@android:color/transparent"

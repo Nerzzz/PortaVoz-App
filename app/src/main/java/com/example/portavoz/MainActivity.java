@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.portavoz.auth.BaseActivity;
 import com.example.portavoz.auth.LoginActivity;
 import com.example.portavoz.auth.RegisterActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,15 +32,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    Button btnLogin, btnRegister, main_loginGoogle;
-
-    private static final String TAG = "GoogleAuth";
-    private static final int RC_SIGN_IN = 9001;
-
-    private FirebaseAuth mAuth;
-    private GoogleSignInClient mGoogleSingInClient;
+    Button btnLogin, btnRegister, main_btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +47,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        main_loginGoogle = findViewById(R.id.main_loginGoogle);
+        main_btnGoogle = findViewById(R.id.main_btnGoogle);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+        startAuth();
 
-        mGoogleSingInClient = GoogleSignIn.getClient(this, gso);
-        mAuth = FirebaseAuth.getInstance();
-
-        main_loginGoogle.setOnClickListener(new View.OnClickListener() {
+        main_btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                singIn();
+                startGoogleSingIn();
             }
         });
 
@@ -90,63 +80,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void singIn() {
-        Intent signInIntent = mGoogleSingInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+    @Override
+    protected void onAuthSucess(FirebaseUser user) {
+        Intent intent = new Intent(MainActivity.this, FeedActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "Login bem-sucedido: " + account.getId());
-                firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                Log.w(TAG, "Login falhou", e);
-                updateUI(null);
-                Toast.makeText(this, "Falha ao logar com o goole", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "Autenticação bem sucedida");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user);
-                } else {
-                    Log.w(TAG, "Autenticação falhou", task.getException());
-                    Toast.makeText(MainActivity.this, "Falha ao autenticar", Toast.LENGTH_SHORT).show();
-                    updateUI(null);
-                }
-            }
-        });
-    }
-
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            Intent intent = new Intent(MainActivity.this, FeedActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        } else {
-            if (main_loginGoogle != null) {
-                main_loginGoogle.setVisibility(View.VISIBLE);
-            }
-        }
+    protected void onAuthFail(String errorMessage) {
+        Toast.makeText(this, "Falha na autenticação: " + errorMessage, Toast.LENGTH_LONG).show();
     }
 }

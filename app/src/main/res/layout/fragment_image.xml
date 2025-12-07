@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ContentFragment">
+    tools:context=".createPost.ContentFragment"
+    android:background="@android:color/transparent">
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/uploadLayout"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_marginBottom="296dp"
@@ -27,6 +28,7 @@
             android:layout_height="63dp"
             android:layout_gravity="center"
             android:contentDescription="upload icon"
+            android:tint="?attr/txtColor"
             app:srcCompat="@drawable/upload_rezised" />
 
         <TextView
@@ -34,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="clique aqui para adicionar uma imagem"
-            android:textColor="@color/black" />
+            android:textColor="?attr/txtColor" />
     </LinearLayout>
 
     <TextView
@@ -47,7 +49,17 @@
         android:text="Imagens da denúncia"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintBottom_toTopOf="@+id/uploadLayout"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/display_selectedImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

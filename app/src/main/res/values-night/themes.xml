@@ -19,5 +19,7 @@
 
         <item name="input_text_bg">#27272a</item>
 
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
 </resources>

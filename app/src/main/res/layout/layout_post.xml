@@ -158,6 +158,8 @@
         android:text="@string/dataPlace"
         android:textColor="?attr/txtColor"
         android:textSize="20sp"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="@+id/post_btnMap"
         app:layout_constraintStart_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
@@ -170,6 +172,8 @@
         android:fontFamily="@font/poppins"
         android:text="Lorem impsium sit dolor armet"
         android:textColor="?attr/txtColor"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/post_txtTitle"
         app:layout_constraintStart_toStartOf="@+id/post_txtTitle"

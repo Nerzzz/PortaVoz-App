@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_report"
+        android:title="Denunciar post"
+        android:icon="@drawable/drop_report" />
+
+    <item
+        android:id="@+id/action_link"
+        android:title="Copiar link"
+        android:icon="@drawable/drop_link" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="Deletar post"
+        android:icon="@drawable/drop_delete"
+        android:visible="false" />
+</menu>
